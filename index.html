@@ -481,23 +481,16 @@
     </style>
 </head>
 <body>
-    <!-- NAV -->
+    <!-- NAV (yksinkertaistettu) -->
     <nav class="navbar">
         <div class="nav-content">
             <a href="#" class="logo">Satakunta Valokuvaus</a>
             
             <div class="nav-links">
-                <a href="#dokumentaarinen">Dokumentaarinen</a>
-                <a href="#paketit">Paketit</a>
-                <a href="#faq">UKK</a>
-                <a href="#yhteystiedot">Yhteystiedot</a>
+                <a href="#yhteystiedot" class="nav-pill">Yhteystiedot</a>
+                <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill">Yrityksille</a>
                 
-                <div onclick="showLocationModal()" class="location-selector" id="current-location">
-                    <span>📍</span>
-                    <span id="selected-city">Valitse paikkakunta</span>
-                </div>
-                
-                <button id="darkmode-toggle" aria-label="Vaihda tumma/vaalea tila">🌙</button>
+                <button id="darkmode-toggle" aria-label="Vaihda tumma/vaalea tila">☾</button>
             </div>
         </div>
     </nav>
@@ -509,14 +502,13 @@
         
         <div class="hero-content">
             <h1>Valokuvista ihminen muistetaan</h1>
-            <p style="max-width: 620px; margin: 0 auto 2.2rem;">Tarjoan vain dokumentaarista valokuvausta – autenttisia hetkiä elämän tärkeimmissä tilanteissa.</p>
             
             <div class="service-offerings">
                 <button class="service-pill" onclick="selectService('Hääkuvaus')">Hääkuvaus</button>
                 <button class="service-pill" onclick="selectService('Hautajaiset')">Hautajaiset</button>
                 <button class="service-pill" onclick="selectService('Valmistujaisjuhlat')">Valmistujaisjuhlat</button>
                 <button class="service-pill" onclick="selectService('Tapahtuma')">Tapahtuma & taltiointi</button>
-                <button class="service-pill" onclick="selectService('Yritys')">Yrityksille</button>
+                <button class="service-pill" onclick="selectService('Ilmakuvaus')">Ilmakuvaus</button>
             </div>
         </div>
     </header>
@@ -685,7 +677,11 @@
 
     <script>
         function selectService(service) {
-            alert(`Kiitos! Olet kiinnostunut palvelusta: ${service}\n\nOtan sinuun yhteyttä pian.`);
+            if (service === 'Ilmakuvaus') {
+                alert('Kiitos kiinnostuksestasi Ilmakuvaukseen!\n\nOtan sinuun yhteyttä pian ja kerron lisää dronella toteutettavasta dokumentaarisesta ilmakuvauksesta.');
+            } else {
+                alert(`Kiitos! Olet kiinnostunut palvelusta: ${service}\n\nOtan sinuun yhteyttä pian.`);
+            }
         }
 
         window.addEventListener('load', function() {
