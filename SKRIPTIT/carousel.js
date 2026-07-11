@@ -1,13 +1,10 @@
 // SatakuntaValokuvaus/SKRIPTIT/carousel.js
-// 3-rivinen infinite scroll karuselli hero-taustaan (vastakkaissuunta keskellä)
 
 (function() {
   function initCarousel() {
     const container = document.getElementById('carousel-bg');
     if (!container) return;
 
-    // Omat kuvat (jos ei löydy, fallback picsum)
-    // Voit korvata nämä omilla poluillasi: MEDIA/VALOKUVAUS/ValokuvausX.webp
     const imagePaths = [
       "MEDIA/VALOKUVAUS/Valokuvaus1.webp",
       "MEDIA/VALOKUVAUS/Valokuvaus2.webp",
@@ -23,7 +20,7 @@
 
     const rowsConfig = [
       { className: 'row-1', direction: 'right' },
-      { className: 'row-2', direction: 'left' },   // Keskimmäinen vastakkaiseen suuntaan
+      { className: 'row-2', direction: 'left' },
       { className: 'row-3', direction: 'right' }
     ];
 
@@ -31,7 +28,6 @@
       const row = document.createElement('div');
       row.className = `carousel-row ${rowInfo.className}`;
 
-      // Tuplataan kuvat saumattomaan looppiin
       const imagesToShow = [...imagePaths, ...imagePaths];
 
       imagesToShow.forEach((src, i) => {
@@ -40,7 +36,6 @@
         img.alt = `Dokumentaarinen valokuvaus ${((rowIndex * 10) + (i % 10)) + 1}`;
         img.loading = 'lazy';
 
-        // Fallback jos omia kuvia ei ole
         img.onerror = function() {
           const seed = (rowIndex * 10 + i % 10) + 20;
           this.src = `https://picsum.photos/id/${seed}/600/400`;
@@ -54,7 +49,6 @@
     });
   }
 
-  // Käynnistä kun DOM valmis
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCarousel);
   } else {

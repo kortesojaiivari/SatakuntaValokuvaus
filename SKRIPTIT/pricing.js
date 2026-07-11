@@ -1,19 +1,15 @@
 // SatakuntaValokuvaus/SKRIPTIT/pricing.js
-// Dynaamiset hinnat + matka-ajan laskenta (0,65 €/km × 2) + numeroiden animaatio
 
 (function() {
-  // Perushinnat Kankaanpäässä (kotipaikka)
   const basePrices = {
-    h1: 800,   // Dokumentaarinen Hääkuvaus (max 6h, 200 kuvaa)
-    h2: 1300,  // Kokopäivän Hääkuvaus
-    h3: 300,   // Kevyt paketti: Potretit + Vihkiminen
-    f1: 300,   // Hautaus / Muistotilaisuus (2h)
-    f2: 600,   // Laajempi hautajaispaketti (4h)
-    t3: 350    // Ajallinen paketti 3h
+    h1: 800,
+    h2: 1300,
+    h3: 300,
+    f1: 300,
+    f2: 600,
+    t3: 350
   };
 
-  // Arvioidut ajomatkat Kankaanpäästä (yhteen suuntaan, km)
-  // Perustuen tyypillisiin reitteihin Satakunnassa
   const distancesKm = {
     "Eura": 65,
     "Eurajoki": 55,
@@ -33,16 +29,14 @@
     "Ulvila": 50
   };
 
-  let currentCity = "Kankaanpää";
+  let currentCity = "Harjavalta";
   let currentTravelFee = 0;
 
-  // Matkakustannus = km × 0,65 € × 2 (edestakaisin)
   function calculateTravelFee(city) {
     const km = distancesKm[city] || 0;
     return Math.round(km * 0.65 * 2);
   }
 
-  // Hinnan animaatio (ylös/alas riippuen muutoksesta)
   function animatePrice(element, newValue, duration = 680) {
     if (!element) return;
 
@@ -59,10 +53,8 @@
 
     function step(now) {
       const progress = Math.min((now - startTime) / duration, 1);
-      // Pehmeä easeOutCubic
       const easedProgress = 1 - Math.pow(1 - progress, 3);
       const currentVal = Math.round(startValue + range * easedProgress);
-
       element.textContent = currentVal + " €";
 
       if (progress < 1) {
@@ -75,7 +67,6 @@
     requestAnimationFrame(step);
   }
 
-  // Päivittää kaikki hinnat animaatiolla
   function updateAllPrices(newTravelFee) {
     const priceElements = {
       h1: document.getElementById('price-h1'),
@@ -83,7 +74,7 @@
       h3: document.getElementById('price-h3'),
       f1: document.getElementById('price-f1'),
       f2: document.getElementById('price-f2'),
-      t3: document.getElementById('price-t3')  // Lisätty 3h paketille
+      t3: document.getElementById('price-t3')
     };
 
     Object.keys(basePrices).forEach(key => {
@@ -94,7 +85,6 @@
       const oldText = el.textContent;
       const oldPrice = parseInt(oldText.replace(' €', ''), 10) || basePrices[key];
 
-      // Animaatio vain jos hinta todella muuttuu
       if (oldPrice !== newPrice) {
         animatePrice(el, newPrice);
       } else {
@@ -103,40 +93,27 @@
     });
   }
 
-  // Julkinen funktio paikkakunnan vaihtoon (kutsutaan location.js:stä)
   window.selectCityAndUpdatePrices = function(city) {
     if (!city || city === currentCity) return;
 
     currentCity = city;
     currentTravelFee = calculateTravelFee(city);
 
-    // Päivittää hinnat animaatiolla
     updateAllPrices(currentTravelFee);
 
-    // Päivittää alaheaderin teksti
     const locationText = document.getElementById('bottom-location-text');
     if (locationText) {
-      if (city === "Kankaanpää") {
-        locationText.innerHTML = `Kuvauspaikka: <strong>${city}</strong> <span style="font-size:0.85rem; opacity:0.7;">(kotipaikka)</span>`;
-      } else {
-        locationText.innerHTML = `Kuvauspaikka: <strong>${city}</strong>`;
-      }
+      locationText.innerHTML = `Kuvauspaikka: <strong>${city}</strong>`;
     }
 
-    // Sulje modaali jos auki
     const modal = document.getElementById('location-modal');
     if (modal) modal.style.display = 'none';
-
-    // Valinnainen: näytä pieni vahvistus (voi poistaa)
-    // console.log(`Paikkakunta vaihdettu: ${city} | Matkakustannus: ${currentTravelFee} €`);
   };
 
-  // Alustetaan oletushinnat (Kankaanpää = 0€ lisä)
   function initPricing() {
-    currentTravelFee = 0;
-    currentCity = "Kankaanpää";
+    currentTravelFee = calculateTravelFee("Harjavalta");
+    currentCity = "Harjavalta";
 
-    // Aseta alkuhinnat heti
     const priceEls = {
       h1: document.getElementById('price-h1'),
       h2: document.getElementById('price-h2'),
@@ -147,27 +124,21 @@
 
     Object.keys(priceEls).forEach(key => {
       const el = priceEls[key];
-      if (el) el.textContent = basePrices[key] + " €";
+      if (el) el.textContent = (basePrices[key] + currentTravelFee) + " €";
     });
 
-    // 3h paketti (jos id lisätty HTML:ään)
     const t3el = document.getElementById('price-t3');
-    if (t3el) t3el.textContent = basePrices.t3 + " €";
+    if (t3el) t3el.textContent = (basePrices.t3 + currentTravelFee) + " €";
 
-    // Alusta alaheaderin teksti
     const locationText = document.getElementById('bottom-location-text');
     if (locationText) {
-      locationText.innerHTML = `Kuvauspaikka: <strong>Kankaanpää</strong> <span style="font-size:0.85rem; opacity:0.7;">(kotipaikka)</span>`;
+      locationText.innerHTML = `Kuvauspaikka: <strong>Harjavalta</strong>`;
     }
   }
 
-  // Käynnistä
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPricing);
   } else {
     initPricing();
   }
-
-  // Vie myös etäisyyksien tarkasteluun (valinnainen debug)
-  window.getSatakuntaDistances = () => distancesKm;
 })();

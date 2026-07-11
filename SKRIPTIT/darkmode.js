@@ -1,5 +1,4 @@
 // SatakuntaValokuvaus/SKRIPTIT/darkmode.js
-// Tumma/vaalea tila + ikonin vaihto + localStorage
 
 (function() {
   const toggleBtn = document.getElementById('darkmode-toggle');
@@ -12,13 +11,12 @@
       toggleBtn.setAttribute('aria-label', 'Vaihda vaalea tila');
     } else {
       document.body.classList.remove('dark-mode');
-      toggleBtn.textContent = '🌙';
+      toggleBtn.textContent = '☾';
       toggleBtn.setAttribute('aria-label', 'Vaihda tumma tila');
     }
     localStorage.setItem('satakuntaDarkMode', isDark ? 'true' : 'false');
   }
 
-  // Alustus
   const saved = localStorage.getItem('satakuntaDarkMode');
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const initialDark = saved === 'true' || (saved === null && prefersDark);
