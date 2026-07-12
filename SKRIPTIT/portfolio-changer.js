@@ -1,39 +1,81 @@
 // SatakuntaValokuvaus/SKRIPTIT/portfolio-changer.js
-// Valokuvausprojektien vaihtuva showcase (sovellettu tälle sivulle)
+// 1. Dokumentaarinen kuvaus -osion vaihtuva kuva (20s intervalli + random järjestys)
+// 2. Valokuvausprojektien vaihtuva showcase
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // =====================================================
+    // 1. DOKUMENTAARINEN KUVAUS - VAIHTUVA KUVA (20 sekuntia)
+    // =====================================================
+    const dokumentaarinenImages = [
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus2.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus6.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus13.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus16.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus18.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus23.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus27.webp"
+    ];
+
+    const docImage = document.getElementById('dokumentaarinen-image');
+
+    if (docImage) {
+        // Sekoita kuvat satunnaiseen järjestykseen
+        let shuffledImages = [...dokumentaarinenImages].sort(() => Math.random() - 0.5);
+        let currentIndex = 0;
+
+        // Aseta ensimmäinen kuva satunnaisesti
+        docImage.src = shuffledImages[currentIndex];
+
+        // Vaihda kuvaa 20 sekunnin välein
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % shuffledImages.length;
+            docImage.style.transition = 'opacity 0.6s ease';
+            docImage.style.opacity = '0';
+
+            setTimeout(() => {
+                docImage.src = shuffledImages[currentIndex];
+                docImage.style.opacity = '1';
+            }, 600);
+        }, 20000);
+    }
+
+    // =====================================================
+    // 2. VALOKUVAUSPROJEKTIT (Portfolio Changer)
+    // =====================================================
     const categories = [
         {
             title: "TuplaKupla - Teatterikuvaus",
             media: [
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus40.webp", alt: "Teatterikuvaus 40" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus41.webp", alt: "Teatterikuvaus 41" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus42.webp", alt: "Teatterikuvaus 42" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus43.webp", alt: "Teatterikuvaus 43" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus44.webp", alt: "Teatterikuvaus 44" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus45.webp", alt: "Teatterikuvaus 45" }
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus40.webp", alt: "Teatterikuvaus 40" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus41.webp", alt: "Teatterikuvaus 41" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus42.webp", alt: "Teatterikuvaus 42" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus43.webp", alt: "Teatterikuvaus 43" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus44.webp", alt: "Teatterikuvaus 44" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus45.webp", alt: "Teatterikuvaus 45" }
             ]
         },
         {
             title: "Combat Camera",
             media: [
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus13.webp", alt: "Combat 13" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus3.webp", alt: "Combat 3" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus14.webp", alt: "Combat 14" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp", alt: "Combat 1" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus5.webp", alt: "Combat 5" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus21.webp", alt: "Combat 21" }
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus13.webp", alt: "Combat 13" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus3.webp", alt: "Combat 3" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus14.webp", alt: "Combat 14" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus1.webp", alt: "Combat 1" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus5.webp", alt: "Combat 5" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus21.webp", alt: "Combat 21" }
             ]
         },
         {
             title: "Laura Voutilainen - Kerran Keväällä",
             media: [
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus62.webp", alt: "Laura Voutilainen 62" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus68.webp", alt: "Laura Voutilainen 68" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus73.webp", alt: "Laura Voutilainen 73" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus54.webp", alt: "Laura Voutilainen 54" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus76.webp", alt: "Laura Voutilainen 76" },
-                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus65.webp", alt: "Laura Voutilainen 65" }
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus62.webp", alt: "Laura Voutilainen 62" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus68.webp", alt: "Laura Voutilainen 68" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus73.webp", alt: "Laura Voutilainen 73" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus54.webp", alt: "Laura Voutilainen 54" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus76.webp", alt: "Laura Voutilainen 76" },
+                { src: "MEDIA/VALOKUVAUS/Valokuvaus65.webp", alt: "Laura Voutilainen 65" }
             ]
         }
     ];
@@ -49,10 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetAutoCycle() {
         clearInterval(autoCycleInterval);
-        autoCycleInterval = setInterval(updateDisplay, 8000);
+        autoCycleInterval = setInterval(updateDisplay, 5000);
     }
 
-    // Luo kategoriapisteet
     if (dotsContainer) {
         dotsContainer.innerHTML = '';
         categories.forEach((_, i) => {
@@ -106,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
                 currentImageOffset = 0;
             }
-        }, 600);
+        }, 300);
     }
 
     if (gridElement) {
