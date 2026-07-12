@@ -85,6 +85,19 @@
     }
 
     createCityButtons(cityList);
+
+    // Automaattinen scrollaus Paketit ja hinta -osioon, jotta asiakas näkee hinnanmuutoksen
+    const packagesSection = document.getElementById('paketit');
+    if (packagesSection) {
+      // Pieni viive jotta modaali ehtii avautua ensin
+      setTimeout(() => {
+        packagesSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 250);
+    }
+
     modal.style.display = 'flex';
   };
 
