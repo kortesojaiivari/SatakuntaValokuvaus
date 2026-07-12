@@ -186,4 +186,9 @@
 
   // Vie myös etäisyyksien tarkasteluun (valinnainen debug)
   window.getSatakuntaDistances = () => distancesKm;
+
+  // Julkinen funktio nykyisen paikkakunnan hakemiseen (käytetään location.js:ssä dynaamiseen korostukseen)
+  window.getCurrentCity = function() {
+    return currentCity;
+  };
 })();
