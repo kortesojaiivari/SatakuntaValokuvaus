@@ -293,6 +293,26 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.1rem;
         }
+
+        /* Hääkuvauspaketit - 3 vierekkäin isolla näytöllä */
+        .haakuvaus-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+        @media (min-width: 1100px) {
+            .haakuvaus-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Hautauspaketit - 2 vierekkäin */
+        .hautaus-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+        @media (min-width: 900px) {
+            .hautaus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
         
         .package-card {
             border: 1px solid var(--border);
@@ -417,19 +437,19 @@
             transform: translateX(4px);
         }
         
-        #darkmode-toggle {
-            font-size: 1.7rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.4rem 0.6rem;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            color: var(--text);
+        .city-btn:active {
+            transform: scale(0.95);
+            background: #d4af37;
+            color: #111;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.25);
+            transition: all 0.05s ease;
         }
-        
-        #darkmode-toggle:hover {
-            transform: scale(1.28);
+
+        .city-btn.clicked {
+            transform: scale(0.9);
+            background: #b8972e;
+            color: #111;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.3);
         }
         
         .animate-on-scroll {
@@ -442,7 +462,7 @@
             transform: translateY(0);
         }
 
-        /* === UUSI: ALAHEADER (bottom header) === */
+        /* === ALAHEADER === */
         .bottom-header {
             position: fixed;
             bottom: 0;
@@ -516,7 +536,7 @@
     </style>
 </head>
 <body>
-    <!-- NAV (yksinkertaistettu) -->
+    <!-- NAV (yksinkertaistettu - ilman darkmodea) -->
     <nav class="navbar">
         <div class="nav-content">
             <a href="#" class="logo">Satakunta Valokuvaus</a>
@@ -524,9 +544,6 @@
             <div class="nav-links">
                 <a href="#yhteystiedot" class="nav-pill">Yhteystiedot</a>
                 <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill">Yrityksille</a>
-                
-                <!-- Darkmode -->
-                <button id="darkmode-toggle" aria-label="Vaihda tumma/vaalea tila">☾</button>
             </div>
         </div>
     </nav>
@@ -563,13 +580,15 @@
         </div>
     </section>
 
-    <!-- PAKETIT -->
+    <!-- PAKETIT (ryhmitelty) -->
     <section id="paketit" class="packages">
         <h2 class="section-title">Kuvauspaketit</h2>
         <p style="text-align:center; margin-bottom:2.5rem; font-size:1.1rem; opacity:0.85;">Hinnat sisältävät matkakustannukset paikkakunnan mukaan (0,65 €/km × 2)</p>
-        
-        <div class="package-grid">
-            <!-- Hääkuvaus 6h -->
+
+        <!-- HÄÄKUVAUSPAKETIT - 3 vierekkäin -->
+        <h3 style="text-align:center; margin: 2.5rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hääkuvauspaketit</h3>
+        <div class="package-grid haakuvaus-grid">
+            <!-- Dokumentaarinen Hääkuvaus 6h -->
             <div class="package-card highlight">
                 <h3>Dokumentaarinen Hääkuvaus</h3>
                 <p>Enintään 6 tuntia</p>
@@ -582,7 +601,7 @@
                 <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
-            <!-- Kokopäivä -->
+            <!-- Kokopäivän Hääkuvaus -->
             <div class="package-card">
                 <h3>Kokopäivän Hääkuvaus</h3>
                 <p>Aamusta yöhön</p>
@@ -596,7 +615,7 @@
                 <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
-            <!-- Kevyt -->
+            <!-- Kevyt paketti -->
             <div class="package-card">
                 <h3>Kevyt paketti: Potretit + Vihkiminen</h3>
                 <p>Kirkko & juhlatila</p>
@@ -604,12 +623,17 @@
                 <p>~40+ kuvaa</p>
                 <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
-            
+        </div>
+
+        <!-- HAUTAUSPAKETIT - 2 vierekkäin -->
+        <h3 style="text-align:center; margin: 3rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hautauspaketit</h3>
+        <div class="package-grid hautaus-grid">
             <!-- Hautaus 2h -->
             <div class="package-card">
                 <h3>Hautaus / Muistotilaisuus (2h)</h3>
                 <div class="price" id="price-f1">300 €</div>
                 <p>Hautaan siirtäminen + siunaus</p>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
             <!-- Hautaus 4h -->
@@ -617,19 +641,17 @@
                 <h3>Laajempi hautajaispaketti (4h)</h3>
                 <div class="price" id="price-f2">600 €</div>
                 <p>Koko tilaisuus</p>
-            </div>
-            
-            <!-- 3h paketti -->
-            <div class="package-card">
-                <h3>Ajallinen paketti 3h</h3>
-                <div class="price" id="price-t3">350 €</div>
-                <p>Sopii hautajaisiin tai valmistujaisiin</p>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
         </div>
-        
-        <div style="text-align:center; margin-top:4.8rem; font-size:1.18rem;">
-            <strong>Lisätunnit alkaen 116 € / h</strong><br>
-            <small style="opacity:0.7;">(matkakustannukset lisätään paikkakunnan mukaan)</small>
+
+        <!-- RÄÄTÄLÖITY PAKETTI -->
+        <div style="margin-top: 3.5rem; text-align: center;">
+            <div class="package-card" style="max-width: 720px; margin: 0 auto; border: 2px solid var(--accent);">
+                <h3>Eikö mieleistä pakettia löytynyt?</h3>
+                <p style="margin: 1.2rem 0; font-size: 1.1rem;">Ota yhteyttä, niin räätälöidään sinulle juuri sopiva ratkaisu.</p>
+                <a href="#yhteystiedot" class="service-pill" style="display: inline-block; text-decoration: none; padding: 0.85rem 2.2rem; font-size: 1.05rem;">Ota yhteyttä</a>
+            </div>
         </div>
     </section>
 
@@ -652,6 +674,11 @@
                 <div class="price">70 €</div>
                 <p>Täyslaadukkaat kuvat Postin pakettiautomaattiin</p>
             </div>
+            <div class="package-card">
+                <h3>Lisätunti</h3>
+                <div class="price">116 €</div>
+                <p>Lisäaika kuvaukseen (hinta per tunti)</p>
+            </div>
         </div>
     </section>
 
@@ -666,7 +693,7 @@
             </div>
             <div class="faq-item">
                 <h4>Varausmaksu?</h4>
-                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopullisesta laskusta.</p>
+                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopfinalisesta laskusta.</p>
             </div>
             <div class="faq-item">
                 <h4>Kilometrikorvaukset?</h4>
@@ -714,7 +741,6 @@
     </div>
 
     <!-- SKRIPTIT -->
-    <script src="SKRIPTIT/darkmode.js"></script>
     <script src="SKRIPTIT/header.js"></script>
     <script src="SKRIPTIT/carousel.js"></script>
     <script src="SKRIPTIT/pricing.js"></script>
