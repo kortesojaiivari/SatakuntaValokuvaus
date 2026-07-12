@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetAutoCycle() {
         clearInterval(autoCycleInterval);
-        autoCycleInterval = setInterval(updateDisplay, 5000);
+        autoCycleInterval = setInterval(updateDisplay, 8000);
     }
 
     // Luo kategoriapisteet
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
                 currentImageOffset = 0;
             }
-        }, 300);
+        }, 600);
     }
 
     if (gridElement) {
