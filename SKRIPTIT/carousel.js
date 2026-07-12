@@ -1,57 +1,69 @@
 // SatakuntaValokuvaus/SKRIPTIT/carousel.js
+// Oma dedikoitu 3-rivinen infinite scroll kuvakaruselli
+// Eri kuvat jokaiselle riville + saumaton loop + fallback
 
 (function() {
+  // === MÄÄRITELTÄVÄT KUVAT RIVEITTÄIN ===
+  // Ylä rivi (row-1)
+  const topRow = [13,3,14,1,5,21,4,77,10,6,7,12,18,24,26,9,37,30,11,33,34,2,16,22,23,27];
+
+  // Keskirivi (row-2) - liikkuu vastakkaiseen suuntaan
+  const middleRow = [40,41,42,43,44,45,62,68,73,54,76,65,70,74,72,56,59];
+
+  // Alarivi (row-3)
+  const bottomRow = [80,83,90,91,93,100,101,102,103,104,105,106,82,84,85,86,87,88,89];
+
+  const basePath = "MEDIA/VALOKUVAUSARKISTO/Valokuvaus";
+
+  function createCarouselRow(container, imageNumbers, rowClass, direction) {
+    const row = document.createElement('div');
+    row.className = `carousel-row ${rowClass}`;
+
+    // Tuplataan lista saumattoman loopin takia
+    const doubled = [...imageNumbers, ...imageNumbers];
+
+    doubled.forEach(num => {
+      const img = document.createElement('img');
+      img.src = `${basePath}${num}.webp`;
+      img.alt = `Satakunta Valokuvaus - kuva ${num}`;
+      img.loading = 'lazy';
+
+      // Fallback jos kuvaa ei löydy
+      img.onerror = function() {
+        this.src = `https://picsum.photos/id/${(num % 50) + 10}/600/400`;
+        this.style.opacity = '0.7';
+      };
+
+      row.appendChild(img);
+    });
+
+    container.appendChild(row);
+  }
+
   function initCarousel() {
     const container = document.getElementById('carousel-bg');
     if (!container) return;
 
-    const imagePaths = [
-      "MEDIA/VALOKUVAUS/Valokuvaus1.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus2.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus3.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus4.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus5.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus6.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus7.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus8.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus9.webp",
-      "MEDIA/VALOKUVAUS/Valokuvaus10.webp"
-    ];
+    // Tyhjennä mahdolliset vanhat rivit
+    container.innerHTML = '';
 
-    const rowsConfig = [
-      { className: 'row-1', direction: 'right' },
-      { className: 'row-2', direction: 'left' },
-      { className: 'row-3', direction: 'right' }
-    ];
+    // Ylä rivi
+    createCarouselRow(container, topRow, 'row-1', 'right');
 
-    rowsConfig.forEach((rowInfo, rowIndex) => {
-      const row = document.createElement('div');
-      row.className = `carousel-row ${rowInfo.className}`;
+    // Keskirivi (vastakkaiseen suuntaan)
+    createCarouselRow(container, middleRow, 'row-2', 'left');
 
-      const imagesToShow = [...imagePaths, ...imagePaths];
-
-      imagesToShow.forEach((src, i) => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `Dokumentaarinen valokuvaus ${((rowIndex * 10) + (i % 10)) + 1}`;
-        img.loading = 'lazy';
-
-        img.onerror = function() {
-          const seed = (rowIndex * 10 + i % 10) + 20;
-          this.src = `https://picsum.photos/id/${seed}/600/400`;
-          this.style.opacity = '0.85';
-        };
-
-        row.appendChild(img);
-      });
-
-      container.appendChild(row);
-    });
+    // Alarivi
+    createCarouselRow(container, bottomRow, 'row-3', 'right');
   }
 
+  // Käynnistä
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCarousel);
   } else {
     initCarousel();
   }
+
+  // Mahdollisuus kutsua uudelleen tarvittaessa
+  window.reinitCarousel = initCarousel;
 })();
