@@ -118,23 +118,28 @@
             color: var(--accent);
         }
 
-        .location-selector {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .nav-pill {
             background: #f1f1f1;
-            padding: 0.55rem 1.1rem;
-            border-radius: 50px;
+            color: #333;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
             font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
         
-        .dark-mode .location-selector {
-            background: #222;
+        .dark-mode .nav-pill {
+            background: #2a2a2a;
+            color: #ddd;
         }
-
+        
+        .nav-pill:hover {
+            background: #d4af37;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
         /* HERO + KARUSELLI */
         .hero {
             height: 62vh;
@@ -250,6 +255,10 @@
             box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
         }
         
+        .service-pill:active {
+            transform: scale(0.98);
+        }
+        
         section {
             padding: 105px 5%;
             max-width: 1200px;
@@ -332,6 +341,7 @@
             font-weight: 700;
             color: var(--primary);
             margin: 1.15rem 0 0.5rem;
+            transition: color 0.2s ease;
         }
         
         .location-price-note {
@@ -383,31 +393,37 @@
             color: var(--text);
             padding: 3.4rem;
             border-radius: 22px;
-            max-width: 530px;
+            max-width: 620px;
+            width: 92%;
             text-align: center;
         }
         
         .city-btn {
             display: block;
             width: 100%;
-            padding: 1.15rem;
-            margin: 0.95rem 0;
+            padding: 1.05rem 1.4rem;
+            margin: 0.45rem 0;
             background: #f1f1f1;
-            border: none;
+            border: 1px solid #ddd;
             border-radius: 14px;
-            font-size: 1.12rem;
+            font-size: 1.08rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s ease;
+            text-align: left;
+            font-weight: 500;
         }
         
         .dark-mode .city-btn {
             background: #222;
             color: #ddd;
+            border-color: #444;
         }
         
         .city-btn:hover {
             background: var(--accent);
             color: white;
+            border-color: var(--accent);
+            transform: translateX(4px);
         }
         
         #darkmode-toggle {
@@ -435,48 +451,76 @@
             transform: translateY(0);
         }
 
+        /* === UUSI: ALAHEADER (bottom header) === */
         .bottom-header {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             background: var(--nav-bg);
+            backdrop-filter: blur(14px);
             border-top: 1px solid var(--border);
-            padding: 0.85rem 1.5rem;
             z-index: 950;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: 1.2rem 2rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+            opacity: 0;
+            transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), 
+                        opacity 0.35s ease;
+            pointer-events: none;
         }
         
         .bottom-header.visible {
             transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
         }
         
         .bottom-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            gap: 1.2rem;
-            justify-content: center;
+            gap: 1rem;
         }
         
         .select-location-btn {
             background: #d4af37;
             color: #111;
             border: none;
-            padding: 0.65rem 1.4rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
+            font-size: 1.15rem;
             font-weight: 700;
             cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s;
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .select-location-btn:hover {
+            background: #c5a030;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.45);
         }
         
         .location-text {
-            font-size: 1.05rem;
-            color: var(--text);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #222;
+            font-weight: 600;
+            justify-self: start;
+        }
+        
+        .dark-mode .location-text {
+            color: #ddd;
+        }
+        
+        .dark-mode .bottom-header {
+            background: rgba(15,15,15,0.96);
         }
     </style>
 </head>
@@ -490,6 +534,7 @@
                 <a href="#yhteystiedot" class="nav-pill">Yhteystiedot</a>
                 <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill">Yrityksille</a>
                 
+                <!-- Darkmode -->
                 <button id="darkmode-toggle" aria-label="Vaihda tumma/vaalea tila">☾</button>
             </div>
         </div>
@@ -502,6 +547,8 @@
         
         <div class="hero-content">
             <h1>Valokuvista ihminen muistetaan</h1>
+            
+            <!-- POISTETTU: pitkä kuvauslause -->
             
             <div class="service-offerings">
                 <button class="service-pill" onclick="selectService('Hääkuvaus')">Hääkuvaus</button>
@@ -530,8 +577,10 @@
     <!-- PAKETIT -->
     <section id="paketit" class="packages">
         <h2 class="section-title">Kuvauspaketit</h2>
+        <p style="text-align:center; margin-bottom:2.5rem; font-size:1.1rem; opacity:0.85;">Hinnat sisältävät matkakustannukset paikkakunnan mukaan (0,65 €/km × 2)</p>
         
         <div class="package-grid">
+            <!-- Hääkuvaus 6h -->
             <div class="package-card highlight">
                 <h3>Dokumentaarinen Hääkuvaus</h3>
                 <p>Enintään 6 tuntia</p>
@@ -541,9 +590,10 @@
                     <li>✓ Autenttinen tyyli</li>
                     <li>✓ Paras valikoima</li>
                 </ul>
-                <small class="location-price-note">Hinta nousee valitun paikkakunnan mukaan + matkakustannus</small>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
+            <!-- Kokopäivä -->
             <div class="package-card">
                 <h3>Kokopäivän Hääkuvaus</h3>
                 <p>Aamusta yöhön</p>
@@ -554,29 +604,33 @@
                     <li>✓ Kuvat 24h sisällä (sneak peek)</li>
                     <li>✓ Instagram-versiot saatavilla</li>
                 </ul>
-                <small class="location-price-note">Hinta nousee valitun paikkakunnan mukaan + matkakustannus</small>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
+            <!-- Kevyt -->
             <div class="package-card">
                 <h3>Kevyt paketti: Potretit + Vihkiminen</h3>
                 <p>Kirkko & juhlatila</p>
                 <div class="price" id="price-h3">300 €</div>
                 <p>~40+ kuvaa</p>
-                <small class="location-price-note">Hinta nousee valitun paikkakunnan mukaan + matkakustannus</small>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
+            <!-- Hautaus 2h -->
             <div class="package-card">
                 <h3>Hautaus / Muistotilaisuus (2h)</h3>
                 <div class="price" id="price-f1">300 €</div>
                 <p>Hautaan siirtäminen + siunaus</p>
             </div>
             
+            <!-- Hautaus 4h -->
             <div class="package-card">
                 <h3>Laajempi hautajaispaketti (4h)</h3>
                 <div class="price" id="price-f2">600 €</div>
                 <p>Koko tilaisuus</p>
             </div>
             
+            <!-- 3h paketti -->
             <div class="package-card">
                 <h3>Ajallinen paketti 3h</h3>
                 <div class="price" id="price-t3">350 €</div>
@@ -585,7 +639,8 @@
         </div>
         
         <div style="text-align:center; margin-top:4.8rem; font-size:1.18rem;">
-            <strong>Lisätunnit alkaen 116 € / h</strong>
+            <strong>Lisätunnit alkaen 116 € / h</strong><br>
+            <small style="opacity:0.7;">(matkakustannukset lisätään paikkakunnan mukaan)</small>
         </div>
     </section>
 
@@ -644,37 +699,40 @@
         <p style="margin-top:3.8rem; opacity:0.55; font-size:0.92rem;">© 2026 Satakunta Valokuvaus. Kaikki oikeudet pidätetään.</p>
     </footer>
 
-    <!-- LOCATION MODAL -->
+    <!-- LOCATION MODAL (keskitetty) -->
     <div id="location-modal" class="location-modal">
         <div class="modal-content">
             <h3>Valitse paikkakunta</h3>
             <p style="margin:0.6rem 0 1.8rem; opacity:0.75; font-size:1.05rem;">Hinnat päivittyvät automaattisesti matkakustannuksilla</p>
             
+            <!-- Kaupungit lisätään dynaamisesti location.js:llä aakkosjärjestyksessä -->
             <div id="city-list-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 0.55rem; margin-bottom: 1.4rem;"></div>
             
             <button onclick="closeModal()" style="margin-top:1.2rem; background:none; border:1px solid #666; padding:0.85rem 2.4rem; border-radius:50px; color:#777; font-size:0.95rem;">Sulje</button>
         </div>
     </div>
 
-    <!-- ALAHEADER -->
+    <!-- ALAHEADER (näkyy scrollatessa alas) -->
     <div id="bottom-header" class="bottom-header">
         <div class="bottom-content">
-            <button onclick="showLocationModal()" class="select-location-btn" aria-label="Valitse paikkakunta">
-                📍
-            </button>
             <span id="bottom-location-text" class="location-text">
-                <strong>Harjavalta</strong>
+                Kuvauspaikka: <strong>Harjavalta</strong>
             </span>
+            <button onclick="showLocationModal()" class="select-location-btn" aria-label="Vaihda paikkakunta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M12 21.5C12 21.5 20 14 20 9C20 5.13401 16.866 2 13 2C9.13401 2 6 5.13401 6 9C6 14 12 21.5 12 21.5Z" fill="currentColor"/><circle cx="12" cy="9" r="3" fill="#ffffff"/></svg>
+                Vaihda paikkakunta
+            </button>
         </div>
     </div>
 
-    <!-- SKRIPTIT -->
+    <!-- SKRIPTIT (erillisissä tiedostoissa) -->
     <script src="SKRIPTIT/darkmode.js"></script>
     <script src="SKRIPTIT/header.js"></script>
     <script src="SKRIPTIT/carousel.js"></script>
     <script src="SKRIPTIT/pricing.js"></script>
     <script src="SKRIPTIT/location.js"></script>
 
+    <!-- Pieni inline-skripti palveluvalinnoille + alustus -->
     <script>
         function selectService(service) {
             if (service === 'Ilmakuvaus') {
@@ -682,10 +740,18 @@
             } else {
                 alert(`Kiitos! Olet kiinnostunut palvelusta: ${service}\n\nOtan sinuun yhteyttä pian.`);
             }
+            // Tulevaisuudessa: window.location.href = '#paketit';
         }
 
+        // Varmistetaan että alaheaderin teksti päivittyy oikein myös jos pricing.js myöhässä
         window.addEventListener('load', function() {
-            // Varmistus
+            // Pieni varmistus: jos hintoja ei vielä päivitetty
+            setTimeout(function() {
+                const t3 = document.getElementById('price-t3');
+                if (t3 && t3.textContent === '350 €') {
+                    // Jo alustettu pricing.js:ssä
+                }
+            }, 800);
         });
     </script>
 </body>
