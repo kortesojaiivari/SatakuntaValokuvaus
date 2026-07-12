@@ -1,5 +1,5 @@
 // SatakuntaValokuvaus/SKRIPTIT/location.js
-// Paikkakuntavalikko (aakkosjärjestyksessä) + keskitetty modaali + integrointi hinnoitteluun + dynaaminen klikkausefekti
+// Paikkakuntavalikko (aakkosjärjestyksessä) + keskitetty modaali + integrointi hinnoitteluun + dynaaminen klikkausefekti + dynaaminen korostus
 
 (function() {
   const satakuntaCities = [
@@ -13,13 +13,27 @@
 
     container.innerHTML = ''; // Tyhjennä vanhat
 
+    // Hae nykyinen valittu paikkakunta alaheaderista (dynaaminen korostus)
+    let currentSelected = "Harjavalta";
+    const locText = document.getElementById('bottom-location-text');
+    if (locText) {
+      const strong = locText.querySelector('strong');
+      if (strong) {
+        currentSelected = strong.textContent.trim();
+      } else {
+        // fallback
+        const match = locText.textContent.match(/:\s*([A-Za-zäöåÄÖÅ]+)/);
+        if (match) currentSelected = match[1];
+      }
+    }
+
     satakuntaCities.forEach(city => {
       const btn = document.createElement('button');
       btn.className = 'city-btn';
       btn.textContent = city;
 
-      // Korostetaan Harjavalta oletuksena
-      if (city === "Harjavalta") {
+      // Korosta dynaamisesti nykyinen valittu paikkakunta (ei aina Harjavalta)
+      if (city === currentSelected) {
         btn.style.border = '2px solid #d4af37';
         btn.style.fontWeight = '600';
       }
