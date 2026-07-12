@@ -13,17 +13,20 @@
 
     container.innerHTML = ''; // Tyhjennä vanhat
 
-    // Hae nykyinen valittu paikkakunta alaheaderista (dynaaminen korostus)
+    // Hae nykyinen valittu paikkakunta (ensisijaisesti pricing.js:stä, fallback DOM)
     let currentSelected = "Harjavalta";
-    const locText = document.getElementById('bottom-location-text');
-    if (locText) {
-      const strong = locText.querySelector('strong');
-      if (strong) {
-        currentSelected = strong.textContent.trim();
-      } else {
-        // fallback
-        const match = locText.textContent.match(/:\s*([A-Za-zäöåÄÖÅ]+)/);
-        if (match) currentSelected = match[1];
+    if (typeof window.getCurrentCity === 'function') {
+      currentSelected = window.getCurrentCity();
+    } else {
+      const locText = document.getElementById('bottom-location-text');
+      if (locText) {
+        const strong = locText.querySelector('strong');
+        if (strong) {
+          currentSelected = strong.textContent.trim();
+        } else {
+          const match = locText.textContent.match(/:\s*([A-Za-zäöåÄÖÅ]+)/);
+          if (match) currentSelected = match[1];
+        }
       }
     }
 
