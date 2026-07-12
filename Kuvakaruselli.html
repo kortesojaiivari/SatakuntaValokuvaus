@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satakunta Valokuvaus – Kuvakaruselli</title>
+    
+    <!-- GOOGLE ANALYTICS 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTMFLZTH9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JTMFLZTH9R', { 'anonymize_ip': true });
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+        
+        :root {
+            --primary: #1a1a1a;
+            --accent: #d4af37;
+            --bg: #ffffff;
+            --text: #333333;
+            --card-bg: #ffffff;
+            --border: #eeeeee;
+            --nav-bg: rgba(255,255,255,0.96);
+        }
+        
+        .dark-mode {
+            --primary: #f0f0f0;
+            --accent: #d4af37;
+            --bg: #0f0f0f;
+            --text: #dddddd;
+            --card-bg: #1a1a1a;
+            --border: #333333;
+            --nav-bg: rgba(15,15,15,0.96);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), 
+                        box-shadow 0.3s ease;
+        }
+        
+        .navbar.nav-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.1rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1.02rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-pill {
+            background: #f1f1f1;
+            color: #333;
+            padding: 0.45rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .dark-mode .nav-pill {
+            background: #2a2a2a;
+            color: #ddd;
+        }
+        
+        .nav-pill:hover {
+            background: #d4af37;
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        /* HERO + KARUSELLI */
+        .hero {
+            height: 62vh;
+            min-height: 480px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .carousel-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0.82;
+        }
+        
+        .carousel-row {
+            position: absolute;
+            width: 200%;
+            display: flex;
+            gap: 8px;
+            will-change: transform;
+        }
+        
+        .carousel-row img {
+            width: 260px;
+            height: 155px;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+            flex-shrink: 0;
+            transition: transform 0.4s ease;
+        }
+        
+        .carousel-row img:hover {
+            transform: scale(1.015);
+        }
+        
+        .row-1 { top: 14%; animation: scroll-right 48s linear infinite; }
+        .row-2 { top: 42%; animation: scroll-left 39s linear infinite; }
+        .row-3 { top: 70%; animation: scroll-right 55s linear infinite; }
+        
+        @keyframes scroll-right {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        
+        @keyframes scroll-left {
+            from { transform: translateX(-50%); }
+            to { transform: translateX(0); }
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.42), rgba(0,0,0,0.68));
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 920px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 4.9rem;
+            margin-bottom: 1.1rem;
+            text-shadow: 0 5px 28px rgba(0,0,0,0.75);
+            line-height: 1.03;
+            color: #ffffff;
+        }
+        
+        .service-offerings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            justify-content: center;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        
+        .service-pill {
+            background: rgba(255,255,255,0.9);
+            color: #222;
+            border: 2px solid #d4af37;
+            padding: 0.75rem 1.65rem;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+        
+        .service-pill:hover {
+            background: #d4af37;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .service-pill:active {
+            transform: scale(0.98);
+        }
+        
+        section {
+            padding: 105px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 3.15rem;
+            text-align: center;
+            margin-bottom: 3.2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            width: 85px;
+            height: 3.5px;
+            background: var(--accent);
+            display: block;
+            margin: 24px auto;
+        }
+        
+        .dokumentaarinen {
+            background: #f8f8f8;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4.2rem;
+            align-items: center;
+        }
+        
+        .dark-mode .dokumentaarinen {
+            background: #161616;
+        }
+        
+        .packages {
+            background: var(--bg);
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.1rem;
+        }
+        
+        .package-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2.7rem;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            background: var(--card-bg);
+        }
+        
+        .package-card:hover {
+            transform: translateY(-13px);
+            box-shadow: 0 28px 60px rgba(0,0,0,0.13);
+            border-color: var(--accent);
+        }
+        
+        .package-card.highlight {
+            border: 3px solid var(--accent);
+            position: relative;
+        }
+        
+        .package-card.highlight::before {
+            content: "SUOSITELTU";
+            position: absolute;
+            top: -15px;
+            right: 34px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.8rem;
+            padding: 6px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .price {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.15rem 0 0.5rem;
+            transition: color 0.2s ease;
+        }
+        
+        .location-price-note {
+            font-size: 0.95rem;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .dark-mode .location-price-note {
+            color: #aaa;
+        }
+        
+        .faq {
+            background: #f8f8f8;
+        }
+        
+        .dark-mode .faq {
+            background: #161616;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.7rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.7rem;
+        }
+        
+        footer {
+            background: #0a0a0a;
+            color: #ccc;
+            text-align: center;
+            padding: 4.8rem 2rem;
+        }
+        
+        .location-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.78);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            color: var(--text);
+            padding: 3.4rem;
+            border-radius: 22px;
+            max-width: 620px;
+            width: 92%;
+            text-align: center;
+        }
+        
+        .city-btn {
+            display: block;
+            width: 100%;
+            padding: 1.05rem 1.4rem;
+            margin: 0.45rem 0;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 14px;
+            font-size: 1.08rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .dark-mode .city-btn {
+            background: #222;
+            color: #ddd;
+            border-color: #444;
+        }
+        
+        .city-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: translateX(4px);
+        }
+        
+        #darkmode-toggle {
+            font-size: 1.7rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.4rem 0.6rem;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            color: var(--text);
+        }
+        
+        #darkmode-toggle:hover {
+            transform: scale(1.28);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transition: all 0.85s cubic-bezier(0.4,0,0.2,1);
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === UUSI: ALAHEADER (bottom header) === */
+        .bottom-header {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(14px);
+            border-top: 1px solid var(--border);
+            z-index: 950;
+            padding: 1.2rem 2rem;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), 
+                        opacity 0.35s ease;
+            pointer-events: none;
+        }
+        
+        .bottom-header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .select-location-btn {
+            background: #d4af37;
+            color: #111;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.35);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .select-location-btn:hover {
+            background: #c5a030;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.45);
+        }
+        
+        .location-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #222;
+            font-weight: 600;
+            justify-self: start;
+        }
+        
+        .dark-mode .location-text {
+            color: #ddd;
+        }
+        
+        .dark-mode .bottom-header {
+            background: rgba(15,15,15,0.96);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV (yksinkertaistettu) -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">Satakunta Valokuvaus</a>
+            
+            <div class="nav-links">
+                <a href="#yhteystiedot" class="nav-pill">Yhteystiedot</a>
+                <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill">Yrityksille</a>
+                
+                <!-- Darkmode -->
+                <button id="darkmode-toggle" aria-label="Vaihda tumma/vaalea tila">☾</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO + KUVAKARUSELLI -->
+    <header class="hero">
+        <div class="carousel-background" id="carousel-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Valokuvista ihminen muistetaan</h1>
+            
+            <div class="service-offerings">
+                <button class="service-pill" onclick="selectService('Hääkuvaus')">Hääkuvaus</button>
+                <button class="service-pill" onclick="selectService('Hautajaiset')">Hautajaiset</button>
+                <button class="service-pill" onclick="selectService('Valmistujaisjuhlat')">Valmistujaisjuhlat</button>
+                <button class="service-pill" onclick="selectService('Tapahtuma')">Tapahtuma & taltiointi</button>
+                <button class="service-pill" onclick="selectService('Ilmakuvaus')">Ilmakuvaus</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- DOKUMENTAARINEN -->
+    <section id="dokumentaarinen" class="dokumentaarinen">
+        <div>
+            <h2 class="section-title" style="text-align:left;">Dokumentaarinen kuvaus</h2>
+            <p style="font-size:1.32rem; max-width:490px;">
+                Dokumentaarisessa kuvaamisessa ikuistan tilanteita mahdollisimman autenttisesti. 
+                Kuvausreissuilta tulee yleensä kameraan 100–1000 kuvaa. Valitsen parhaimmat ja jälkikäsittelen ne huolella.
+            </p>
+        </div>
+        <div>
+            <img src="https://picsum.photos/id/1015/840/630" alt="Dokumentaarinen hääkuvaus" style="width:100%; border-radius:18px; box-shadow:0 25px 55px rgba(0,0,0,0.18);">
+        </div>
+    </section>
+
+    <!-- PAKETIT -->
+    <section id="paketit" class="packages">
+        <h2 class="section-title">Kuvauspaketit</h2>
+        <p style="text-align:center; margin-bottom:2.5rem; font-size:1.1rem; opacity:0.85;">Hinnat sisältävät matkakustannukset paikkakunnan mukaan (0,65 €/km × 2)</p>
+        
+        <div class="package-grid">
+            <!-- Hääkuvaus 6h -->
+            <div class="package-card highlight">
+                <h3>Dokumentaarinen Hääkuvaus</h3>
+                <p>Enintään 6 tuntia</p>
+                <div class="price" id="price-h1">800 €</div>
+                <p>Enintään 200 kuvaa</p>
+                <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                    <li>✓ Autenttinen tyyli</li>
+                    <li>✓ Paras valikoima</li>
+                </ul>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+            
+            <!-- Kokopäivä -->
+            <div class="package-card">
+                <h3>Kokopäivän Hääkuvaus</h3>
+                <p>Aamusta yöhön</p>
+                <div class="price" id="price-h2">1300 €</div>
+                <p>Enintään 600 kuvaa</p>
+                <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                    <li>✓ Ennen vihkintää, vihkiminen, potretit, juhlat</li>
+                    <li>✓ Kuvat 24h sisällä (sneak peek)</li>
+                    <li>✓ Instagram-versiot saatavilla</li>
+                </ul>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+            
+            <!-- Kevyt -->
+            <div class="package-card">
+                <h3>Kevyt paketti: Potretit + Vihkiminen</h3>
+                <p>Kirkko & juhlatila</p>
+                <div class="price" id="price-h3">300 €</div>
+                <p>~40+ kuvaa</p>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+            
+            <!-- Hautaus 2h -->
+            <div class="package-card">
+                <h3>Hautaus / Muistotilaisuus (2h)</h3>
+                <div class="price" id="price-f1">300 €</div>
+                <p>Hautaan siirtäminen + siunaus</p>
+            </div>
+            
+            <!-- Hautaus 4h -->
+            <div class="package-card">
+                <h3>Laajempi hautajaispaketti (4h)</h3>
+                <div class="price" id="price-f2">600 €</div>
+                <p>Koko tilaisuus</p>
+            </div>
+            
+            <!-- 3h paketti -->
+            <div class="package-card">
+                <h3>Ajallinen paketti 3h</h3>
+                <div class="price" id="price-t3">350 €</div>
+                <p>Sopii hautajaisiin tai valmistujaisiin</p>
+            </div>
+        </div>
+        
+        <div style="text-align:center; margin-top:4.8rem; font-size:1.18rem;">
+            <strong>Lisätunnit alkaen 116 € / h</strong><br>
+            <small style="opacity:0.7;">(matkakustannukset lisätään paikkakunnan mukaan)</small>
+        </div>
+    </section>
+
+    <!-- LISÄPALVELUT -->
+    <section style="background:#f8f8f8;" class="dark-mode-fix">
+        <h2 class="section-title">Lisäpalvelut</h2>
+        <div class="package-grid">
+            <div class="package-card">
+                <h3>Instagram-valmiit kuvat</h3>
+                <div class="price">70 €</div>
+                <p>4:3-rajaus somea varten + täysikokoiset tiedostot</p>
+            </div>
+            <div class="package-card">
+                <h3>Sneak Peek (24h)</h3>
+                <div class="price">50 €</div>
+                <p>Noin 20 kuvaa jo seuraavana päivänä</p>
+            </div>
+            <div class="package-card">
+                <h3>Muistitikku-toimitus</h3>
+                <div class="price">70 €</div>
+                <p>Täyslaadukkaat kuvat Postin pakettiautomaattiin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UKK -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">Usein kysytyt kysymykset</h2>
+        
+        <div style="max-width:720px; margin:0 auto;">
+            <div class="faq-item">
+                <h4>Kuvien toimitus?</h4>
+                <p>Toimitan kuvat digitaalisesti pilvipalvelun kautta, josta voit ladata ne laitteellesi.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Varausmaksu?</h4>
+                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopullisesta laskusta.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Kilometrikorvaukset?</h4>
+                <p>Lisätään erikseen paikkakunnan mukaan (0,65 € / km × 2). Hinnat päivittyvät automaattisesti valitun paikkakunnan mukaan.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Maksutavat?</h4>
+                <p>Lasku sähköpostitse tai MobilePay.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="yhteystiedot">
+        <p style="font-size:2.15rem; color:white; margin-bottom:1.1rem;">Satakunta Valokuvaus</p>
+        <p>Y-Tunnus 3591660-9</p>
+        <p>Iivari Kortesoja • Kankaanpää / Satakunta</p>
+        <p style="margin-top:2.3rem;">📧 <a href="mailto:info@satakuntavalokuvaus.fi" style="color:#d4af37; text-decoration:none;">info@satakuntavalokuvaus.fi</a></p>
+        <p style="margin-top:3.8rem; opacity:0.55; font-size:0.92rem;">© 2026 Satakunta Valokuvaus. Kaikki oikeudet pidätetään.</p>
+    </footer>
+
+    <!-- LOCATION MODAL -->
+    <div id="location-modal" class="location-modal">
+        <div class="modal-content">
+            <h3>Valitse paikkakunta</h3>
+            <p style="margin:0.6rem 0 1.8rem; opacity:0.75; font-size:1.05rem;">Hinnat päivittyvät automaattisesti matkakustannuksilla</p>
+            
+            <div id="city-list-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 0.55rem; margin-bottom: 1.4rem;"></div>
+            
+            <button onclick="closeModal()" style="margin-top:1.2rem; background:none; border:1px solid #666; padding:0.85rem 2.4rem; border-radius:50px; color:#777; font-size:0.95rem;">Sulje</button>
+        </div>
+    </div>
+
+    <!-- ALAHEADER -->
+    <div id="bottom-header" class="bottom-header">
+        <div class="bottom-content">
+            <span id="bottom-location-text" class="location-text">
+                Kuvauspaikka: <strong>Harjavalta</strong>
+            </span>
+            <button id="select-location-btn" onclick="showLocationModal()" class="select-location-btn" aria-label="Vaihda paikkakunta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align: middle; margin-right: 0.4rem;"><path d="M12 21.5C12 21.5 20 14 20 9C20 5.13401 16.866 2 13 2C9.13401 2 6 5.13401 6 9C6 14 12 21.5 12 21.5Z" fill="currentColor"/><circle cx="12" cy="9" r="3" fill="#ffffff"/></svg>
+                Vaihda paikkakunta
+            </button>
+        </div>
+    </div>
+
+    <!-- SKRIPTIT -->
+    <script src="SKRIPTIT/darkmode.js"></script>
+    <script src="SKRIPTIT/header.js"></script>
+    <script src="SKRIPTIT/carousel.js"></script>
+    <script src="SKRIPTIT/pricing.js"></script>
+    <script src="SKRIPTIT/location.js"></script>
+
+    <script>
+        function selectService(service) {
+            if (service === 'Ilmakuvaus') {
+                alert('Kiitos kiinnostuksestasi Ilmakuvaukseen!\n\nOtan sinuun yhteyttä pian ja kerron lisää dronella toteutettavasta dokumentaarisesta ilmakuvauksesta.');
+            } else {
+                alert(`Kiitos! Olet kiinnostunut palvelusta: ${service}\n\nOtan sinuun yhteyttä pian.`);
+            }
+        }
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const t3 = document.getElementById('price-t3');
+                if (t3 && t3.textContent === '350 €') {
+                    // Jo alustettu
+                }
+            }, 800);
+        });
+    </script>
+</body>
+</html>
