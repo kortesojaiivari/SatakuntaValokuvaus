@@ -60,27 +60,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // === HERO + KARUSELLI + OTSIKKO (tuodaan alemmas mobiilissa) ===
-        if (hero) {
-            if (width < 500) {
-                hero.style.minHeight = '360px';
-                hero.style.paddingTop = '5.8rem';
-                hero.style.paddingBottom = '1.8rem';
+        // === HERO + KARUSELLI + OTSIKKO (dynaaminen hitbox-pohjainen sijoitus) ===
+        if (hero && navbar) {
+            if (width < 600) {
+                // Mittaa todellinen headerin korkeus (kaksi riviä mobiilissa)
+                const headerHeight = navbar.offsetHeight;
+                const extraSpace = 28;
+
+                hero.style.paddingTop = `${headerHeight + extraSpace}px`;
+                hero.style.minHeight = '380px';
 
                 const h1 = hero.querySelector('h1');
                 if (h1) {
-                    h1.style.fontSize = '2.15rem';
-                    h1.style.lineHeight = '1.12';
+                    h1.style.fontSize = '2.1rem';
+                    h1.style.lineHeight = '1.1';
                 }
 
                 const carouselBg = document.getElementById('carousel-bg');
-                if (carouselBg) carouselBg.style.opacity = '0.6';
-            } else if (width < 768) {
-                hero.style.minHeight = '400px';
-                hero.style.paddingTop = '5.2rem';
+                if (carouselBg) carouselBg.style.opacity = '0.55';
+            } else if (width < 900) {
+                hero.style.minHeight = '420px';
+                hero.style.paddingTop = '4.8rem';
             } else {
                 hero.style.minHeight = '480px';
-                hero.style.paddingTop = '0';
+                hero.style.paddingTop = '1.8rem';
             }
         }
 
