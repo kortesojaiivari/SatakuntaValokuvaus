@@ -11,39 +11,61 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
+        // === NAVBAARI (pienempi sekä desktopilla että mobiililla) ===
         if (navbar) {
-            if (width < 600) {
+            if (width < 500) {
+                navbar.style.padding = '0.4rem 0.7rem';
+                const logo = navbar.querySelector('.logo');
+                if (logo) logo.style.fontSize = '1.15rem';
+
+                const navLinks = navbar.querySelector('.nav-links');
+                if (navLinks) navLinks.style.gap = '0.45rem';
+
+                navbar.querySelectorAll('.nav-pill').forEach(pill => {
+                    pill.style.padding = '0.35rem 0.7rem';
+                    pill.style.fontSize = '0.82rem';
+                });
+            } else if (width < 768) {
                 navbar.style.padding = '0.5rem 0.9rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.35rem';
+                if (logo) logo.style.fontSize = '1.3rem';
+
                 const navLinks = navbar.querySelector('.nav-links');
-                if (navLinks) navLinks.style.gap = '0.6rem';
-            } else if (width < 900) {
-                navbar.style.padding = '0.7rem 1.3rem';
+                if (navLinks) navLinks.style.gap = '0.55rem';
+
+                navbar.querySelectorAll('.nav-pill').forEach(pill => {
+                    pill.style.padding = '0.4rem 0.85rem';
+                    pill.style.fontSize = '0.88rem';
+                });
+            } else if (width < 1100) {
+                navbar.style.padding = '0.65rem 1.6rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.6rem';
+                if (logo) logo.style.fontSize = '1.55rem';
             } else {
-                navbar.style.padding = '1rem 2rem';
+                navbar.style.padding = '0.75rem 2rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.85rem';
+                if (logo) logo.style.fontSize = '1.65rem';
             }
         }
 
+        // === HERO + KARUSELLI + OTSIKKO (tuodaan alemmas mobiilissa) ===
         if (hero) {
             if (width < 500) {
-                hero.style.minHeight = '380px';
-                hero.style.paddingTop = '4.5rem';
-                hero.style.paddingBottom = '2rem';
+                hero.style.minHeight = '360px';
+                hero.style.paddingTop = '5.8rem';
+                hero.style.paddingBottom = '1.8rem';
+
                 const h1 = hero.querySelector('h1');
                 if (h1) {
-                    h1.style.fontSize = '2.35rem';
-                    h1.style.lineHeight = '1.15';
+                    h1.style.fontSize = '2.15rem';
+                    h1.style.lineHeight = '1.12';
                 }
+
                 const carouselBg = document.getElementById('carousel-bg');
-                if (carouselBg) carouselBg.style.opacity = '0.65';
+                if (carouselBg) carouselBg.style.opacity = '0.6';
             } else if (width < 768) {
-                hero.style.minHeight = '420px';
-                hero.style.paddingTop = '3.8rem';
+                hero.style.minHeight = '400px';
+                hero.style.paddingTop = '5.2rem';
             } else {
                 hero.style.minHeight = '480px';
                 hero.style.paddingTop = '0';
