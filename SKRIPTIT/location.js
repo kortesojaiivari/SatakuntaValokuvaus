@@ -69,12 +69,13 @@
 
     createCityButtons(cityList);
 
-    // Mobiilissa / tabletissa: varmista scrollattavuus + riittävät marginaalit
-    if (window.innerWidth < 768 && cityList) {
-      cityList.style.maxHeight = '62vh';
-      cityList.style.overflowY = 'auto';
-      cityList.style.paddingTop = '12px';
-      cityList.style.paddingBottom = '12px';
+    // Mobiilissa / tabletissa: vain listan skrollaus (ei kahta scrollia)
+    const modalContent = modal.querySelector('.modal-content');
+    if (window.innerWidth < 768 && modalContent && cityList) {
+      modalContent.style.maxHeight = '78vh';
+      modalContent.style.overflowY = 'auto';
+      cityList.style.paddingTop = '8px';
+      cityList.style.paddingBottom = '8px';
     }
 
     modal.style.display = 'flex';
