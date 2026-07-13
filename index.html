@@ -329,7 +329,7 @@
             gap: 2.1rem;
         }
 
-        /* Hääkuvauspaketit - 3 vierekkäin isolla näytöllä */
+        /* Hääkuvaus - 3 vierekkäin isolla näytöllä */
         .haakuvaus-grid {
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         }
@@ -885,8 +885,8 @@
         <h2 class="section-title">Kuvauspaketit</h2>
         <p style="text-align:center; margin-bottom:2.5rem; font-size:1.1rem; opacity:0.85;">Hinnat sisältävät matkakustannukset paikkakunnan mukaan (0,65 €/km × 2)</p>
 
-        <!-- HÄÄKUVAUSPAKETIT - 3 vierekkäin -->
-        <h3 style="text-align:center; margin: 2.5rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hääkuvauspaketit</h3>
+        <!-- HÄÄKUVAUS - 3 vierekkäin -->
+        <h3 style="text-align:center; margin: 2.5rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hääkuvaus</h3>
         <div class="package-grid haakuvaus-grid">
             <!-- Dokumentaarinen Hääkuvaus 6h -->
             <div class="package-card highlight">
@@ -925,32 +925,49 @@
             </div>
         </div>
 
-        <!-- HAUTAUSPAKETIT - 2 vierekkäin -->
-        <h3 style="text-align:center; margin: 3rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hautauspaketit</h3>
+        <!-- HAUTAJAIS- JA MUISTOTILAISUUS PAKETIT -->
+        <h3 style="text-align:center; margin: 3rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hautajais- ja muistotilaisuus paketit</h3>
         <div class="package-grid hautaus-grid">
-            <!-- Hautaus 2h -->
+            <!-- Hautajaiset / Muistotilaisuus 2h -->
             <div class="package-card">
-                <h3>Hautaus / Muistotilaisuus (2h)</h3>
+                <h3>Hautajaiset / Muistotilaisuus (2h)</h3>
                 <div class="price" id="price-f1">300 €</div>
                 <p>Hautaan siirtäminen + siunaus</p>
                 <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
             
-            <!-- Hautaus 4h -->
+            <!-- Hautajaiset / Muistotilaisuus 4h -->
             <div class="package-card">
-                <h3>Laajempi hautajaispaketti (4h)</h3>
+                <h3>Hautajaiset / Muistotilaisuus (4h)</h3>
                 <div class="price" id="price-f2">600 €</div>
                 <p>Koko tilaisuus</p>
                 <small class="location-price-note">Hinta sisältää matkakustannukset</small>
             </div>
         </div>
 
-        <!-- RÄÄTÄLÖITY PAKETTI -->
-        <div style="margin-top: 3.5rem; text-align: center;">
-            <div class="package-card" style="max-width: 720px; margin: 0 auto; border: 2px solid var(--accent);">
-                <h3>Eikö mieleistä pakettia löytynyt?</h3>
-                <p style="margin: 1.2rem 0; font-size: 1.1rem;">Ota yhteyttä, niin räätälöidään sinulle juuri sopiva ratkaisu.</p>
-                <a href="#yhteystiedot" class="service-pill" style="display: inline-block; text-decoration: none; padding: 0.85rem 2.2rem; font-size: 1.05rem;">Ota yhteyttä</a>
+        <!-- 3H AIKAPAKETTI + RÄÄTÄLÖITY PAKETTI -->
+        <div style="margin-top: 3.5rem;">
+            <div class="package-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1100px; margin: 0 auto; gap: 2rem;">
+                
+                <!-- Uusi 3 tunnin aikapaketti -->
+                <div class="package-card">
+                    <h3>3 tunnin aikapaketti</h3>
+                    <p>Enintään 3 tuntia kuvaamista</p>
+                    <div class="price" id="price-t3">400 €</div>
+                    <p>~80–120 kuvaa</p>
+                    <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                        <li>✓ Joustava ajankohta</li>
+                        <li>✓ Sopii moneen tilanteeseen</li>
+                    </ul>
+                    <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+                </div>
+
+                <!-- RÄÄTÄLÖITY PAKETTI -->
+                <div class="package-card" style="border: 2px solid var(--accent);">
+                    <h3>Eikö mieleistä pakettia löytynyt?</h3>
+                    <p style="margin: 1.2rem 0; font-size: 1.1rem;">Ota yhteyttä, niin räätälöidään sinulle juuri sopiva ratkaisu.</p>
+                    <a href="#yhteystiedot" class="service-pill" style="display: inline-block; text-decoration: none; padding: 0.85rem 2.2rem; font-size: 1.05rem;">Ota yhteyttä</a>
+                </div>
             </div>
         </div>
     </section>
