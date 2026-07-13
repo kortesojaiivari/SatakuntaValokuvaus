@@ -11,10 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
-        // === NAVBAARI (pienempi sekä desktopilla että mobiililla) ===
+        // === NAVBAARI (erittäin pieni mobiilissa + tabletissa) ===
         if (navbar) {
             if (width < 500) {
-                navbar.style.padding = '0.4rem 0.7rem';
+                // Mobiili: ~70% pienempi
+                navbar.style.padding = '0.32rem 0.55rem';
+                const logo = navbar.querySelector('.logo');
+                if (logo) logo.style.fontSize = '1.0rem';
+
+                const navLinks = navbar.querySelector('.nav-links');
+                if (navLinks) navLinks.style.gap = '0.35rem';
+
+                navbar.querySelectorAll('.nav-pill').forEach(pill => {
+                    pill.style.padding = '0.28rem 0.55rem';
+                    pill.style.fontSize = '0.75rem';
+                });
+            } else if (width < 768) {
+                // Tabletti: ~50% pienempi
+                navbar.style.padding = '0.42rem 0.75rem';
                 const logo = navbar.querySelector('.logo');
                 if (logo) logo.style.fontSize = '1.15rem';
 
@@ -25,26 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     pill.style.padding = '0.35rem 0.7rem';
                     pill.style.fontSize = '0.82rem';
                 });
-            } else if (width < 768) {
-                navbar.style.padding = '0.5rem 0.9rem';
-                const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.3rem';
-
-                const navLinks = navbar.querySelector('.nav-links');
-                if (navLinks) navLinks.style.gap = '0.55rem';
-
-                navbar.querySelectorAll('.nav-pill').forEach(pill => {
-                    pill.style.padding = '0.4rem 0.85rem';
-                    pill.style.fontSize = '0.88rem';
-                });
             } else if (width < 1100) {
-                navbar.style.padding = '0.65rem 1.6rem';
+                navbar.style.padding = '0.6rem 1.5rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.55rem';
+                if (logo) logo.style.fontSize = '1.5rem';
             } else {
-                navbar.style.padding = '0.75rem 2rem';
+                navbar.style.padding = '0.7rem 2rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.65rem';
+                if (logo) logo.style.fontSize = '1.6rem';
             }
         }
 
