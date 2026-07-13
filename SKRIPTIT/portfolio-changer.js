@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 docImage.src = shuffledImages[currentIndex];
                 docImage.style.opacity = '1';
             }, 600);
-        }, 20000);
+        }, 25000);
     }
 
     // =====================================================
@@ -48,34 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             title: "TuplaKupla - Teatterikuvaus",
             media: [
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus40.webp", alt: "Teatterikuvaus 40" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus41.webp", alt: "Teatterikuvaus 41" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus42.webp", alt: "Teatterikuvaus 42" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus43.webp", alt: "Teatterikuvaus 43" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus44.webp", alt: "Teatterikuvaus 44" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus45.webp", alt: "Teatterikuvaus 45" }
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus40.webp", alt: "Teatterikuvaus 40" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus41.webp", alt: "Teatterikuvaus 41" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus42.webp", alt: "Teatterikuvaus 42" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus43.webp", alt: "Teatterikuvaus 43" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus44.webp", alt: "Teatterikuvaus 44" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus45.webp", alt: "Teatterikuvaus 45" }
             ]
         },
         {
             title: "Combat Camera",
             media: [
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus13.webp", alt: "Combat 13" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus3.webp", alt: "Combat 3" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus14.webp", alt: "Combat 14" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus1.webp", alt: "Combat 1" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus5.webp", alt: "Combat 5" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus21.webp", alt: "Combat 21" }
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus13.webp", alt: "Combat 13" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus3.webp", alt: "Combat 3" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus14.webp", alt: "Combat 14" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp", alt: "Combat 1" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus5.webp", alt: "Combat 5" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus21.webp", alt: "Combat 21" }
             ]
         },
         {
             title: "Laura Voutilainen - Kerran Keväällä",
             media: [
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus62.webp", alt: "Laura Voutilainen 62" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus68.webp", alt: "Laura Voutilainen 68" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus73.webp", alt: "Laura Voutilainen 73" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus54.webp", alt: "Laura Voutilainen 54" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus76.webp", alt: "Laura Voutilainen 76" },
-                { src: "MEDIA/VALOKUVAUS/Valokuvaus65.webp", alt: "Laura Voutilainen 65" }
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus62.webp", alt: "Laura Voutilainen 62" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus68.webp", alt: "Laura Voutilainen 68" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus73.webp", alt: "Laura Voutilainen 73" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus54.webp", alt: "Laura Voutilainen 54" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus76.webp", alt: "Laura Voutilainen 76" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus65.webp", alt: "Laura Voutilainen 65" }
             ]
         }
     ];
