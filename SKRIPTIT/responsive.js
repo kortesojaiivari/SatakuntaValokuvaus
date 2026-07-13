@@ -11,17 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
-        // === NAVBAARI (pienempi mobiilissa) ===
         if (navbar) {
             if (width < 600) {
                 navbar.style.padding = '0.5rem 0.9rem';
                 const logo = navbar.querySelector('.logo');
                 if (logo) logo.style.fontSize = '1.35rem';
-
                 const navLinks = navbar.querySelector('.nav-links');
-                if (navLinks) {
-                    navLinks.style.gap = '0.6rem';
-                }
+                if (navLinks) navLinks.style.gap = '0.6rem';
             } else if (width < 900) {
                 navbar.style.padding = '0.7rem 1.3rem';
                 const logo = navbar.querySelector('.logo');
@@ -33,18 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // === HERO + KARUSELLI + OTSIKKO ===
         if (hero) {
             if (width < 500) {
                 hero.style.minHeight = '380px';
                 hero.style.paddingTop = '4.5rem';
                 hero.style.paddingBottom = '2rem';
-
                 const h1 = hero.querySelector('h1');
-                if (h1) h1.style.fontSize = '2.35rem';
-                if (h1) h1.style.lineHeight = '1.15';
-
-                // Karuselli alemmas mobiilissa
+                if (h1) {
+                    h1.style.fontSize = '2.35rem';
+                    h1.style.lineHeight = '1.15';
+                }
                 const carouselBg = document.getElementById('carousel-bg');
                 if (carouselBg) carouselBg.style.opacity = '0.65';
             } else if (width < 768) {
@@ -56,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // === SERVICE PILLS ===
         servicePills.forEach(pill => {
             if (width < 480) {
                 pill.style.padding = '0.5rem 1rem';
@@ -70,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // === ALAHEADER ===
         if (bottomHeader) {
             if (width < 600) {
                 bottomHeader.style.padding = '0.75rem 0.9rem';
@@ -79,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // === KARUSELLI KUVAT ===
         const carouselRows = document.querySelectorAll('.carousel-row');
         carouselRows.forEach(row => {
             if (width < 500) {
@@ -103,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // === LOCATION MODAL - MOBIILI SKROLLAUS ===
         if (locationModal && width < 600) {
             const modalContent = locationModal.querySelector('.modal-content');
             if (modalContent) {
@@ -120,21 +110,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Suorita heti
     applyResponsiveAdjustments();
 
-    // Resize-kuuntelu
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(applyResponsiveAdjustments, 120);
     });
 
-    // Portfolio-changer kuvien mobiili fallback (jos WebP ei lataudu)
     const portfolioImages = document.querySelectorAll('#changing-grid img');
     portfolioImages.forEach(img => {
         img.addEventListener('error', () => {
-            // Jos kuva ei lataudu (esim. WebP Safari-ongelma), vaihdetaan kevyeen placeholderiin
             if (!img.dataset.fallbackApplied) {
                 img.src = 'https://picsum.photos/id/1015/600/400';
                 img.dataset.fallbackApplied = 'true';
@@ -142,5 +128,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    console.log('%c[responsive.js] Parannettu mobiilituki aktivoitu', 'color:#4ade80');
+    // =====================================================
+    // ALAHEADER NÄKYVIIN VAIN KUVAUSPAKETIT-OSIOSSA
+    // =====================================================
+    const packagesSection = document.getElementById('paketit');
+    const bottomHeaderEl = document.getElementById('bottom-header');
+
+    if (packagesSection && bottomHeaderEl) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    bottomHeaderEl.classList.add('visible');
+                } else {
+                    if (entry.boundingClientRect.top > 0) {
+                        bottomHeaderEl.classList.remove('visible');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        observer.observe(packagesSection);
+    }
+
+    console.log('%c[responsive.js] Parannettu mobiilituki + alaheader-logiikka aktivoitu', 'color:#4ade80');
 });
