@@ -779,24 +779,21 @@
             }
         }
 
-        /* Lisää hengitystilaa mobiilissa + enemmän reunatilaa sivuille */
+        /* Kevyt sisältöpadding, ei riko karusellia tai kuvaa */
         @media (max-width: 768px) {
-            .dokumentaarinen,
+            .dokumentaarinen > div,
             .packages,
             .project-section,
             .faq {
-                padding-top: 55px !important;
-                padding-bottom: 55px !important;
+                padding-left: 4% !important;
+                padding-right: 4% !important;
             }
 
-            .package-card {
-                margin-bottom: 1.5rem;
-            }
-
-            /* 10% enemmän tyhjää tilaa sivuille */
-            body, .nav-content, section, .project-section, .hero-content {
-                padding-left: 6% !important;
-                padding-right: 6% !important;
+            /* Hero ja karuselli täyteen leveyteen */
+            .hero,
+            .carousel-background {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
         }
 
