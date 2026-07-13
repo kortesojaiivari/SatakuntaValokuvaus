@@ -11,42 +11,52 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
-        // === NAVBAARI (erittäin pieni mobiilissa + tabletissa) ===
+        // === NAVBAARI (erittäin aggressiivinen skaalaus mobiilissa/tabletissa) ===
         if (navbar) {
-            if (width < 500) {
-                // Mobiili: ~70% pienempi
-                navbar.style.padding = '0.32rem 0.55rem';
+            if (width < 480) {
+                // Puhelin: Logo 70% pienempi + vasemmalle, nappulat lähemmäs keskustaa
+                navbar.style.padding = '0.28rem 0.5rem';
+                navbar.style.height = 'auto';
+
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.0rem';
+                if (logo) {
+                    logo.style.fontSize = '0.95rem';
+                    logo.style.flexShrink = '0';
+                }
+
+                const navLinks = navbar.querySelector('.nav-links');
+                if (navLinks) {
+                    navLinks.style.gap = '0.25rem';
+                    navLinks.style.justifyContent = 'flex-end';
+                }
+
+                navbar.querySelectorAll('.nav-pill').forEach(pill => {
+                    pill.style.padding = '0.22rem 0.5rem';
+                    pill.style.fontSize = '0.68rem';
+                    pill.style.whiteSpace = 'nowrap';
+                });
+            } else if (width < 768) {
+                // Tabletti: Logo pienempi + nappulat mahtuvat
+                navbar.style.padding = '0.38rem 0.7rem';
+
+                const logo = navbar.querySelector('.logo');
+                if (logo) logo.style.fontSize = '1.1rem';
 
                 const navLinks = navbar.querySelector('.nav-links');
                 if (navLinks) navLinks.style.gap = '0.35rem';
 
                 navbar.querySelectorAll('.nav-pill').forEach(pill => {
-                    pill.style.padding = '0.28rem 0.55rem';
-                    pill.style.fontSize = '0.75rem';
-                });
-            } else if (width < 768) {
-                // Tabletti: ~50% pienempi
-                navbar.style.padding = '0.42rem 0.75rem';
-                const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.15rem';
-
-                const navLinks = navbar.querySelector('.nav-links');
-                if (navLinks) navLinks.style.gap = '0.45rem';
-
-                navbar.querySelectorAll('.nav-pill').forEach(pill => {
-                    pill.style.padding = '0.35rem 0.7rem';
-                    pill.style.fontSize = '0.82rem';
+                    pill.style.padding = '0.3rem 0.6rem';
+                    pill.style.fontSize = '0.78rem';
                 });
             } else if (width < 1100) {
-                navbar.style.padding = '0.6rem 1.5rem';
+                navbar.style.padding = '0.55rem 1.4rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.5rem';
+                if (logo) logo.style.fontSize = '1.45rem';
             } else {
-                navbar.style.padding = '0.7rem 2rem';
+                navbar.style.padding = '0.65rem 2rem';
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.6rem';
+                if (logo) logo.style.fontSize = '1.55rem';
             }
         }
 
