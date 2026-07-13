@@ -166,10 +166,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     applyResponsiveAdjustments();
 
+    // Resize-kuuntelu + desktop navbar skaalaus
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(applyResponsiveAdjustments, 120);
+        resizeTimeout = setTimeout(() => {
+            // Desktop: Varmista että headerin elementit pysyvät näkyvissä ikkunan koon muuttuessa
+            if (window.innerWidth >= 900 && navbar) {
+                const logo = navbar.querySelector('.logo');
+                const navLinks = navbar.querySelector('.nav-links');
+
+                if (logo) logo.style.fontSize = window.innerWidth < 1100 ? '1.45rem' : '1.55rem';
+                if (navLinks) navLinks.style.gap = window.innerWidth < 1100 ? '1.6rem' : '2.1rem';
+
+                navbar.querySelectorAll('.nav-pill').forEach(pill => {
+                    pill.style.padding = window.innerWidth < 1100 ? '0.4rem 0.9rem' : '0.45rem 1.1rem';
+                    pill.style.fontSize = window.innerWidth < 1100 ? '0.95rem' : '1.02rem';
+                });
+            }
+            applyResponsiveAdjustments();
+        }, 100);
     });
 
     const portfolioImages = document.querySelectorAll('#changing-grid img');
