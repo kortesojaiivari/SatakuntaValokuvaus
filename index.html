@@ -728,6 +728,36 @@
                 padding: 0.5rem 0.95rem !important;
             }
         }
+
+        /* === LOCATION MODAL MOBIILI PARANNUKSET === */
+        @media (max-width: 600px) {
+            .location-modal .modal-content {
+                max-height: 78vh;
+                overflow-y: auto;
+                padding: 1.8rem 1.4rem;
+                border-radius: 18px;
+            }
+
+            .city-btn {
+                padding: 0.95rem 1.1rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Lisää hengitystilaa mobiilissa (enemmän pystysuuntaa) */
+        @media (max-width: 768px) {
+            .dokumentaarinen,
+            .packages,
+            .project-section,
+            .faq {
+                padding-top: 55px !important;
+                padding-bottom: 55px !important;
+            }
+
+            .package-card {
+                margin-bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
