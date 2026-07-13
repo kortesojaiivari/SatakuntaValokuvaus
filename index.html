@@ -757,6 +757,30 @@
             .package-card {
                 margin-bottom: 1.5rem;
             }
+
+            /* 10% enemmän tyhjää tilaa sivuille */
+            body, .nav-content, section, .project-section, .hero-content {
+                padding-left: 6% !important;
+                padding-right: 6% !important;
+            }
+        }
+
+        /* Scroll-indikaattori paikkakuntamenulle mobiilissa */
+        @media (max-width: 768px) {
+            #city-list-container {
+                position: relative;
+            }
+            #city-list-container::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 22px;
+                background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.08));
+                pointer-events: none;
+                border-radius: 0 0 12px 12px;
+            }
         }
     </style>
 </head>
