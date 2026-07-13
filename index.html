@@ -615,10 +615,123 @@
         .dark-mode .bottom-header {
             background: rgba(15,15,15,0.96);
         }
+
+        /* ============================================
+           MOBIILI + TABLET RESPONSIIVISUUS
+           ============================================ */
+        @media (max-width: 900px) {
+            section {
+                padding: 70px 4% !important;
+            }
+
+            .hero {
+                height: auto !important;
+                min-height: 420px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+                line-height: 1.1;
+            }
+
+            .service-offerings {
+                gap: 0.6rem;
+            }
+
+            .dokumentaarinen {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .package-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .haakuvaus-grid,
+            .hautaus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-section {
+                padding: 50px 4% !important;
+            }
+
+            #changing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0.6rem 1rem !important;
+            }
+
+            .logo {
+                font-size: 1.45rem !important;
+            }
+
+            .nav-links {
+                gap: 0.9rem !important;
+            }
+
+            .nav-pill {
+                padding: 0.4rem 0.95rem;
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.65rem;
+            }
+
+            .service-pill {
+                padding: 0.55rem 1.1rem !important;
+                font-size: 0.92rem !important;
+            }
+
+            .section-title {
+                font-size: 2.4rem !important;
+            }
+
+            .package-card {
+                padding: 2rem 1.6rem;
+            }
+
+            .price {
+                font-size: 2.1rem;
+            }
+
+            .bottom-header {
+                padding: 0.9rem 1rem !important;
+            }
+
+            .location-text {
+                font-size: 1.1rem !important;
+            }
+
+            .select-location-btn {
+                padding: 0.85rem 1.8rem;
+                font-size: 1rem;
+            }
+
+            #changing-grid img {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .service-pill {
+                font-size: 0.85rem !important;
+                padding: 0.5rem 0.95rem !important;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- NAV (yksinkertaistettu - ilman darkmodea) -->
+    <!-- NAV (yksinkertaistettu) -->
     <nav class="navbar">
         <div class="nav-content">
             <a href="#" class="logo">Satakunta Valokuvaus</a>
@@ -840,6 +953,7 @@
     <script src="SKRIPTIT/pricing.js"></script>
     <script src="SKRIPTIT/location.js"></script>
     <script src="SKRIPTIT/portfolio-changer.js"></script>
+    <script src="SKRIPTIT/responsive.js"></script>
 
     <script>
         function selectService(service) {
