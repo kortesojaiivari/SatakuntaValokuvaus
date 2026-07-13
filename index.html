@@ -1,1 +1,264 @@
-PUT_FULL_INDEX_HTML_HERE
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satakunta Valokuvaus – Dokumentaarinen Valokuvaus</title>
+    
+    <!-- GOOGLE ANALYTICS 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTMFLZTH9R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JTMFLZTH9R', { 'anonymize_ip': true });
+    </script>
+
+    <!-- MICROSOFT CLARITY -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ud6y4jpngh");
+    </script>
+
+    <!-- STYLES (kaikki CSS keskitetty tänne – vähentää index.html:n kokoa) -->
+    <script src="SKRIPTIT/styles.js"></script>
+
+</head>
+<body>
+    <!-- YLÄHEADER (dynaamisesti ladattu top-header.js:stä) -->
+    <div id="top-header-mount"></div>
+
+    <!-- HERO + KUVAKARUSELLI -->
+    <header class="hero">
+        <div class="carousel-background" id="carousel-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Valokuvista ihminen muistetaan</h1>
+            
+            <div class="service-offerings">
+                <button class="service-pill" onclick="selectService('Hääkuvaus')">Hääkuvaus</button>
+                <button class="service-pill" onclick="selectService('Hautajaiset')">Hautajaiset</button>
+                <button class="service-pill" onclick="selectService('Valmistujaisjuhlat')">Valmistujaisjuhlat</button>
+                <button class="service-pill" onclick="selectService('Tapahtuma')">Tapahtuma & taltiointi</button>
+                <button class="service-pill" onclick="selectService('Ilmakuvaus')">Ilmakuvaus</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- DOKUMENTAARINEN -->
+    <section id="dokumentaarinen" class="dokumentaarinen">
+        <div>
+            <h2 class="section-title" style="text-align:left;">Dokumentaarinen kuvaus</h2>
+            <p style="font-size:1.32rem; max-width:490px;">
+                Dokumentaarisessa kuvaamisessa ikuistan tilanteita mahdollisimman autenttisesti. 
+                Kuvausreissuilta tulee yleensä kameraan 100–1000 kuvaa. Valitsen parhaimmat ja jälkikäsittelen ne huolella.
+            </p>
+        </div>
+        <div>
+            <img id="dokumentaarinen-image" src="MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp" alt="Dokumentaarinen valokuvaus" style="width:100%; border-radius:18px; box-shadow:0 25px 55px rgba(0,0,0,0.18);">
+        </div>
+    </section>
+
+    <!-- VALOKUVAUSPROJEKTIT (Portfolio Changer) -->
+    <section class="project-section">
+        <div class="project-header">
+            <span class="subtitle">VALOKUVAUSPROJEKTIT</span>
+            <div id="changing-title-container">
+                <h3 id="changing-title" class="changing-title">TuplaKupla - Teatterikuvaus</h3>
+            </div>
+        </div>
+        <div id="changing-grid"></div>
+        <div id="category-dots"></div>
+    </section>
+
+    <!-- PAKETIT -->
+    <section id="paketit" class="packages">
+        <h2 class="section-title">Kuvauspaketit</h2>
+        <p style="text-align:center; margin-bottom:2.5rem; font-size:1.1rem; opacity:0.85;">Hinnat sisältävät matkakustannukset paikkakunnan mukaan (0,65 €/km × 2)</p>
+
+        <!-- HÄÄKUVAUS -->
+        <h3 style="text-align:center; margin: 2.5rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hääkuvaus</h3>
+        <div class="package-grid haakuvaus-grid">
+            <!-- Dokumentaarinen Hääkuvaus 6h -->
+            <div class="package-card highlight">
+                <h3>Dokumentaarinen Hääkuvaus</h3>
+                <p>Enintään 6 tuntia</p>
+                <div class="price" id="price-h1">800 €</div>
+                <p>Enintään 200 muokattua kuvaa</p>
+                <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                    <li>Vihkimen</li>
+                    <li>Hääjuhlien kuvaus</li>
+                    <li>Potretit</li>
+                </ul>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+           
+            <!-- Kokopäivän Hääkuvaus -->
+            <div class="package-card">
+                <h3>Kokopäivän Hääkuvaus</h3>
+                <p>Aamusta yöhön</p>
+                <div class="price" id="price-h2">1300 €</div>
+                <p>Enintään 600 muokattua kuvaa</p>
+                <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                    <li>Dokumentaarinen kuvaaminen koko hääpäistä ennen vihkintää, vihkiminen, potretit, juhlat</li>
+                    <li>Ensimmäiset kuvat toimitetaan 24h sisällä Häistä (sneak peek)</li>
+                    <li>Kuvien toimitus digitaalisesti + Instagram-valmiit versiot</li>
+                </ul>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+           
+            <!-- Kevyt paketti -->
+            <div class="package-card">
+                <h3>Potretit + Vihkiminen</h3>
+                <p>Enintään 2 tuntia</p>
+                <div class="price" id="price-h3">300 €</div>
+                <p>40 muokattua kuvaa</p>
+                <ul style="margin:1.7rem 0; line-height:1.9; font-size:1.06rem;">
+                    <li>Vihkimisen kuvaaminen</li>
+                    <li>Potrettien kuvaaminen samana päivänä</li>
+                </ul>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+        </div>
+
+        <!-- HAUTAJAISET & MUISTOTILAISUUDET -->
+        <h3 style="text-align:center; margin: 3rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Hautajaiset & Muistotilaisuudet</h3>
+        <div class="package-grid hautaus-grid">
+            <div class="package-card">
+                <h3>Hautajaiset / Muistotilaisuus</h3>
+                <p>Enintään 2 tuntia</p>
+                <div class="price" id="price-f1">300 €</div>
+                <p>Siinaaminen + Hautaan siirtäminen</p>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+           
+            <div class="package-card">
+                <h3>Hautajaiset / Muistotilaisuus</h3>
+                <p>Enintään 4 tuntia</p>
+                <div class="price" id="price-f2">600 €</div>
+                <p>Siinaaminen + Hautaan siirtäminen + Muistotilaisuuden kuvaus</p>
+                <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+            </div>
+        </div>
+
+        <!-- LYHYEMMÄT KUVAUKSET -->
+        <div style="margin-top: 3.5rem;">
+            <h3 style="text-align:center; margin: 3rem 0 1.5rem; font-size:1.75rem; color: var(--primary);">Lyhyemmät kuvaukset</h3>
+            <div class="package-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1100px; margin: 0 auto; gap: 2rem;">
+               
+                <!-- 3 tunnin paketti -->
+                <div class="package-card">
+                    <h3>3 tunnin paketti</h3>
+                    <p>Enintään 3 tuntia kuvaamista</p>
+                    <div class="price" id="price-t3">400 €</div>
+                    <p>Esimerkiksi Valmistujais- tai Rippijuhliin</p>
+                    <small class="location-price-note">Hinta sisältää matkakustannukset</small>
+                </div>
+               
+                <!-- RÄÄTÄLÖITY -->
+                <div class="package-card" style="border: 2px solid var(--accent);">
+                    <h3>Eikö mieleistä pakettia löytynyt?</h3>
+                    <p style="margin: 1.2rem 0; font-size: 1.1rem;">Ota yhteyttä, niin räätälöidään sinulle juuri sopiva ratkaisu.</p>
+                    <a href="#yhteystiedot" class="service-pill" style="display: inline-block; text-decoration: none; padding: 0.85rem 2.2rem; font-size: 1.05rem;">Ota yhteyttä</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LISÄPALVELUT -->
+    <section style="background:#f8f8f8;">
+        <h2 class="section-title">Lisäpalvelut</h2>
+        <div class="package-grid">
+            <div class="package-card">
+                <h3>Instagram-valmiit kuvat</h3>
+                <div class="price">70 €</div>
+                <p>4:3-rajaus somea varten + täysikokoiset tiedostot</p>
+            </div>
+            <div class="package-card">
+                <h3>Sneak Peek (24h)</h3>
+                <div class="price">50 €</div>
+                <p>Noin 20 kuvaa jo seuraavana päivänä</p>
+            </div>
+            <div class="package-card">
+                <h3>Muistitikku-toimitus</h3>
+                <div class="price">70 €</div>
+                <p>Täyslaadukkaat kuvat Postin pakettiautomaattiin</p>
+            </div>
+            <div class="package-card">
+                <h3>Lisätunti</h3>
+                <div class="price">116 €</div>
+                <p>Lisäaika kuvaukseen (hinta per tunti)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UKK -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">Usein kysytyt kysymykset</h2>
+        <div style="max-width:720px; margin:0 auto;">
+            <div class="faq-item">
+                <h4>Kuvien toimitus?</h4>
+                <p>Toimitan kuvat digitaalisesti pilvipalvelun kautta, josta voit ladata ne laitteellesi.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Varausmaksu?</h4>
+                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopullisesta laskusta.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Kilometrikorvaukset?</h4>
+                <p>Lisätään erikseen paikkakunnan mukaan (0,65 € / km × 2). Hinnat päivittyvät automaattisesti valitun paikkakunnan mukaan.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Maksutavat?</h4>
+                <p>Lasku sähköpostitse tai MobilePay.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="yhteystiedot">
+        <p style="font-size:2.15rem; color:white; margin-bottom:1.1rem;">Satakunta Valokuvaus</p>
+        <p>Y-Tunnus 3591660-9</p>
+        <p>Iivari Kortesoja • Kankaanpää / Satakunta</p>
+        <p style="margin-top:2.3rem;">📧 <a href="mailto:info@satakuntavalokuvaus.fi" style="color:#d4af37; text-decoration:none;">info@satakuntavalokuvaus.fi</a></p>
+        <p style="margin-top:3.8rem; opacity:0.55; font-size:0.92rem;">© 2026 Satakunta Valokuvaus. Kaikki oikeudet pidätetään.</p>
+    </footer>
+
+    <!-- LOCATION MODAL -->
+    <div id="location-modal" class="location-modal">
+        <div class="modal-content">
+            <h3>Valitse paikkakunta</h3>
+            <p style="margin:0.6rem 0 1.8rem; opacity:0.75; font-size:1.05rem;">Hinnat päivittyvät automaattisesti matkakustannuksilla</p>
+            <div id="city-list-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 0.55rem; margin-bottom: 1.4rem;"></div>
+            <button onclick="closeModal()" style="margin-top:1.2rem; background:none; border:1px solid #666; padding:0.85rem 2.4rem; border-radius:50px; color:#777; font-size:0.95rem;">Sulje</button>
+        </div>
+    </div>
+
+    <!-- ALAHEADER (dynaamisesti ladattu bottom-header.js:stä) -->
+    <div id="bottom-header-mount"></div>
+
+    <!-- SKRIPTIT -->
+    <script src="SKRIPTIT/top-header.js"></script>
+    <script src="SKRIPTIT/bottom-header.js"></script>
+    <script src="SKRIPTIT/carousel.js"></script>
+    <script src="SKRIPTIT/pricing.js"></script>
+    <script src="SKRIPTIT/location.js"></script>
+    <script src="SKRIPTIT/portfolio-changer.js"></script>
+    <script src="SKRIPTIT/responsive.js"></script>
+    <script src="SKRIPTIT/mobile-tablet-scaling.js"></script>
+
+    <script>
+        function selectService(service) {
+            if (service === 'Ilmakuvaus') {
+                alert('Kiitos kiinnostuksestasi Ilmakuvaukseen!\n\nOtan sinuun yhteyttä pian ja kerron lisää dronella toteutettavasta dokumentaarisesta ilmakuvauksesta.');
+            } else {
+                alert(`Kiitos! Olet kiinnostunut palvelusta: ${service}\n\nOtan sinuun yhteyttä pian.`);
+            }
+        }
+    </script>
+</body>
+</html>
