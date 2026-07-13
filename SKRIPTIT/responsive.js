@@ -11,41 +11,55 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
-        // === NAVBAARI (erittäin aggressiivinen skaalaus mobiilissa/tabletissa) ===
+        // === NAVBAARI (keskitetty + skaalautuva mobiilissa/tabletissa) ===
         if (navbar) {
-            if (width < 480) {
+            if (width < 500) {
                 navbar.style.padding = '0.28rem 0.5rem';
                 navbar.style.height = 'auto';
 
                 const logo = navbar.querySelector('.logo');
                 if (logo) {
-                    logo.style.fontSize = '0.95rem';
-                    logo.style.flexShrink = '0';
+                    logo.style.fontSize = '1.35rem';
+                    logo.style.textAlign = 'center';
+                    logo.style.width = '100%';
                 }
 
                 const navLinks = navbar.querySelector('.nav-links');
                 if (navLinks) {
-                    navLinks.style.gap = '0.25rem';
-                    navLinks.style.justifyContent = 'flex-end';
+                    navLinks.style.gap = '0.2rem';
+                    navLinks.style.justifyContent = 'center';
+                    navLinks.style.width = '100%';
                 }
 
                 navbar.querySelectorAll('.nav-pill').forEach(pill => {
-                    pill.style.padding = '0.22rem 0.5rem';
-                    pill.style.fontSize = '0.68rem';
+                    pill.style.padding = '0.28rem 0.5rem';
+                    pill.style.fontSize = '0.7rem';
                     pill.style.whiteSpace = 'nowrap';
+                    pill.style.flex = '1';
+                    pill.style.textAlign = 'center';
                 });
             } else if (width < 768) {
                 navbar.style.padding = '0.38rem 0.7rem';
 
                 const logo = navbar.querySelector('.logo');
-                if (logo) logo.style.fontSize = '1.1rem';
+                if (logo) {
+                    logo.style.fontSize = '1.5rem';
+                    logo.style.textAlign = 'center';
+                    logo.style.width = '100%';
+                }
 
                 const navLinks = navbar.querySelector('.nav-links');
-                if (navLinks) navLinks.style.gap = '0.35rem';
+                if (navLinks) {
+                    navLinks.style.gap = '0.3rem';
+                    navLinks.style.justifyContent = 'center';
+                    navLinks.style.width = '100%';
+                }
 
                 navbar.querySelectorAll('.nav-pill').forEach(pill => {
-                    pill.style.padding = '0.3rem 0.6rem';
+                    pill.style.padding = '0.32rem 0.6rem';
                     pill.style.fontSize = '0.78rem';
+                    pill.style.flex = '1';
+                    pill.style.textAlign = 'center';
                 });
             } else if (width < 1100) {
                 navbar.style.padding = '0.55rem 1.4rem';
