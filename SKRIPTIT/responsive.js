@@ -75,13 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // === HERO + KARUSELLI + OTSIKKO (dynaaminen hitbox-pohjainen sijoitus) ===
         if (hero && navbar) {
             if (width < 600) {
-                setTimeout(() => {
+                // Luotettava mittaus headerin korkeudelle (kaksi riviä)
+                const measureAndApply = () => {
                     const headerHeight = navbar.offsetHeight;
-                    const extraSpace = 32;
+                    const extraSpace = 38;
 
                     hero.style.paddingTop = `${headerHeight + extraSpace}px`;
                     hero.style.minHeight = '380px';
-                }, 90);
+                };
+
+                measureAndApply();
+                setTimeout(measureAndApply, 120);
 
                 const h1 = hero.querySelector('h1');
                 if (h1) {
