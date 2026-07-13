@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // === NAVBAARI (erittäin aggressiivinen skaalaus mobiilissa/tabletissa) ===
         if (navbar) {
             if (width < 480) {
-                // Puhelin: Logo 70% pienempi + vasemmalle, nappulat lähemmäs keskustaa
                 navbar.style.padding = '0.28rem 0.5rem';
                 navbar.style.height = 'auto';
 
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     pill.style.whiteSpace = 'nowrap';
                 });
             } else if (width < 768) {
-                // Tabletti: Logo pienempi + nappulat mahtuvat
                 navbar.style.padding = '0.38rem 0.7rem';
 
                 const logo = navbar.querySelector('.logo');
@@ -63,21 +61,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // === HERO + KARUSELLI + OTSIKKO (dynaaminen hitbox-pohjainen sijoitus) ===
         if (hero && navbar) {
             if (width < 600) {
-                // Mittaa todellinen headerin korkeus (kaksi riviä mobiilissa)
-                const headerHeight = navbar.offsetHeight;
-                const extraSpace = 28;
+                setTimeout(() => {
+                    const headerHeight = navbar.offsetHeight;
+                    const extraSpace = 32;
 
-                hero.style.paddingTop = `${headerHeight + extraSpace}px`;
-                hero.style.minHeight = '380px';
+                    hero.style.paddingTop = `${headerHeight + extraSpace}px`;
+                    hero.style.minHeight = '380px';
+                }, 90);
 
                 const h1 = hero.querySelector('h1');
                 if (h1) {
-                    h1.style.fontSize = '2.1rem';
-                    h1.style.lineHeight = '1.1';
+                    h1.style.fontSize = '2.05rem';
+                    h1.style.lineHeight = '1.08';
                 }
 
                 const carouselBg = document.getElementById('carousel-bg');
-                if (carouselBg) carouselBg.style.opacity = '0.55';
+                if (carouselBg) carouselBg.style.opacity = '0.52';
             } else if (width < 900) {
                 hero.style.minHeight = '420px';
                 hero.style.paddingTop = '4.8rem';
