@@ -72,15 +72,22 @@
     // Mobiilissa / tabletissa: näytä että listaa voi skrollata
     // Scrollaa ensin alas, sitten takaisin ylös (animaatio)
     if (window.innerWidth < 768 && cityList) {
+      // Varmistetaan että elementti on scrollattava
+      cityList.style.maxHeight = '65vh';
+      cityList.style.overflowY = 'auto';
+
       setTimeout(() => {
+        // Mene ensin pohjaan
         cityList.scrollTop = cityList.scrollHeight;
+
+        // Sitten sulava animaatio ylös
         setTimeout(() => {
           cityList.scrollTo({
-            top: 0,
+            top: 40,
             behavior: 'smooth'
           });
-        }, 180);
-      }, 350);
+        }, 220);
+      }, 420);
     }
 
     modal.style.display = 'flex';
