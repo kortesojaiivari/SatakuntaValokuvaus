@@ -1,8 +1,8 @@
 // SatakuntaValokuvaus/SKRIPTIT/location.js
-// Paikkakuntavalikko (vain 16 Satakunnan kuntaa) + mobiili scroll-indikaatio
+// Paikkakuntavalikko (vain 16 Satakunnan kuntaa) + parempi mobiili scroll-indikaattori
 
 (function() {
-  // Vain alkuperäiset 16 Satakunnan kuntaa (ei lisätä uusia)
+  // Vain alkuperäiset 16 Satakunnan kuntaa
   const satakuntaCities = [
     "Eura", "Eurajoki", "Harjavalta", "Huittinen", "Jämijärvi",
     "Kankaanpää", "Kokemäki", "Merikarvia", "Nakkila", "Pomarkku",
@@ -69,25 +69,12 @@
 
     createCityButtons(cityList);
 
-    // Mobiilissa / tabletissa: näytä että listaa voi skrollata
-    // Scrollaa ensin alas, sitten takaisin ylös (animaatio)
+    // Mobiilissa / tabletissa: varmista scrollattavuus + riittävät marginaalit
     if (window.innerWidth < 768 && cityList) {
-      // Varmistetaan että elementti on scrollattava
-      cityList.style.maxHeight = '65vh';
+      cityList.style.maxHeight = '62vh';
       cityList.style.overflowY = 'auto';
-
-      setTimeout(() => {
-        // Mene ensin pohjaan
-        cityList.scrollTop = cityList.scrollHeight;
-
-        // Sitten sulava animaatio ylös
-        setTimeout(() => {
-          cityList.scrollTo({
-            top: 40,
-            behavior: 'smooth'
-          });
-        }, 220);
-      }, 420);
+      cityList.style.paddingTop = '12px';
+      cityList.style.paddingBottom = '12px';
     }
 
     modal.style.display = 'flex';
