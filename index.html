@@ -779,21 +779,21 @@
             }
         }
 
-        /* Kevyt sisältöpadding, ei riko karusellia tai kuvaa */
+        /* Lisätty padding mobiilissa/tabletissa + yhtenäinen ilme */
         @media (max-width: 768px) {
             .dokumentaarinen > div,
             .packages,
             .project-section,
             .faq {
-                padding-left: 4% !important;
-                padding-right: 4% !important;
+                padding-left: 5.5% !important;
+                padding-right: 5.5% !important;
             }
 
-            /* Hero ja karuselli täyteen leveyteen */
+            /* Karuselli ja hero myös noudattavat paddingia (ei leikkaannu) */
             .hero,
             .carousel-background {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
+                padding-left: 5.5% !important;
+                padding-right: 5.5% !important;
             }
         }
 
