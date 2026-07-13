@@ -13,7 +13,6 @@
   };
 
   // KAIKKI HINNAT JA SELITYKSET KESKITETTY TÄHÄN (yksi totuuden lähde)
-  // Nämä on siirretty index.html:stä pricing.js:hen sivun toimivuuden varmistamiseksi.
   const packageDescriptions = {
     h1: {
       title: "Dokumentaarinen Hääkuvaus",
@@ -63,11 +62,9 @@
     }
   };
 
-  // Apufunktio kuvausten hakemiseen (valinnainen tulevaa käyttöä varten)
   window.getPackageDescriptions = () => ({ ...packageDescriptions });
 
   // Arvioidut ajomatkat Kankaanpäästä (yhteen suuntaan, km)
-  // Perustuen tyypillisiin reitteihin Satakunnassa
   const distancesKm = {
     "Eura": 65,
     "Eurajoki": 55,
@@ -90,17 +87,14 @@
   let currentCity = "Kankaanpää";
   let currentTravelFee = 0;
 
-  // Matkakustannus = km × 0,65 € × 2 (edestakaisin)
   function calculateTravelFee(city) {
     const km = distancesKm[city] || 0;
     return Math.round(km * 0.65 * 2);
   }
 
-  // Julkiset apufunktiot fallbackia ja muita skriptejä varten
   window.calculateTravelFee = calculateTravelFee;
   window.getBasePrices = () => ({ ...basePrices });
 
-  // Hinnan animaatio (ylös/alas riippuen muutoksesta)
   function animatePrice(element, newValue, duration = 680) {
     if (!element) return;
 
@@ -117,7 +111,6 @@
 
     function step(now) {
       const progress = Math.min((now - startTime) / duration, 1);
-      // Pehmeä easeOutCubic
       const easedProgress = 1 - Math.pow(1 - progress, 3);
       const currentVal = Math.round(startValue + range * easedProgress);
 
@@ -133,7 +126,6 @@
     requestAnimationFrame(step);
   }
 
-  // Päivittää kaikki hinnat animaatiolla
   function updateAllPrices(newTravelFee) {
     const priceElements = {
       h1: document.getElementById('price-h1'),
@@ -141,7 +133,7 @@
       h3: document.getElementById('price-h3'),
       f1: document.getElementById('price-f1'),
       f2: document.getElementById('price-f2'),
-      t3: document.getElementById('price-t3')  // Lisätty 3h paketille
+      t3: document.getElementById('price-t3')
     };
 
     Object.keys(basePrices).forEach(key => {
@@ -152,7 +144,6 @@
       const oldText = el.textContent;
       const oldPrice = parseInt(oldText.replace(' €', ''), 10) || basePrices[key];
 
-      // Animaatio vain jos hinta todella muuttuu
       if (oldPrice !== newPrice) {
         animatePrice(el, newPrice);
       } else {
@@ -161,26 +152,21 @@
     });
   }
 
-  // Julkinen funktio paikkakunnan vaihtoon (kutsutaan location.js:stä)
   window.selectCityAndUpdatePrices = function(city) {
     if (!city || city === currentCity) return;
 
     currentCity = city;
     currentTravelFee = calculateTravelFee(city);
 
-    // Päivittää hinnat animaatiolla
     updateAllPrices(currentTravelFee);
 
-    // Päivittää alaheaderin teksti (ilman kotipaikka-mainintaa)
     const locationText = document.getElementById('bottom-location-text');
     if (locationText) {
       locationText.innerHTML = `Kuvauspaikka: <strong>${city}</strong>`;
     }
 
-    // Dynaamisesti päivittää alaheaderin nappula valitun paikkakunnan nimeksi (responsivinen UX)
     const selectBtn = document.getElementById('select-location-btn');
     if (selectBtn) {
-      // Säilytetään ikoni, vaihdetaan teksti paikkakunnan nimeksi
       const svg = selectBtn.querySelector('svg');
       if (svg) {
         selectBtn.innerHTML = '';
@@ -192,20 +178,14 @@
       selectBtn.setAttribute('aria-label', `Vaihda paikkakunta (nykyinen: ${city})`);
     }
 
-    // Sulje modaali jos auki
     const modal = document.getElementById('location-modal');
     if (modal) modal.style.display = 'none';
-
-    // Valinnainen: näytä pieni vahvistus (voi poistaa)
-    // console.log(`Paikkakunta vaihdettu: ${city} | Matkakustannus: ${currentTravelFee} €`);
   };
 
-  // Alustetaan oletushinnat (Harjavalta oletuksena)
   function initPricing() {
     currentCity = "Harjavalta";
     currentTravelFee = calculateTravelFee(currentCity);
 
-    // Aseta alkuhinnat heti (mukaan lukien matkakustannus)
     const priceEls = {
       h1: document.getElementById('price-h1'),
       h2: document.getElementById('price-h2'),
@@ -222,30 +202,24 @@
       }
     });
 
-    // 3h paketti
     const t3el = document.getElementById('price-t3');
     if (t3el) {
       t3el.textContent = (basePrices.t3 + currentTravelFee) + " €";
     }
 
-    // Alusta alaheaderin teksti (ilman "kotipaikka" mainintaa)
     const locationText = document.getElementById('bottom-location-text');
     if (locationText) {
       locationText.innerHTML = `Kuvauspaikka: <strong>${currentCity}</strong>`;
     }
   };
 
-  // Käynnistä
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initPricing);
   } else {
     initPricing();
   }
 
-  // Vie myös etäisyyksien tarkasteluun (valinnainen debug)
   window.getSatakuntaDistances = () => distancesKm;
-
-  // Julkinen funktio nykyisen paikkakunnan hakemiseen (käytetään location.js:ssä dynaamiseen korostukseen)
   window.getCurrentCity = function() {
     return currentCity;
   };
