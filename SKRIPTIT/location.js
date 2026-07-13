@@ -1,122 +1,156 @@
 // SatakuntaValokuvaus/SKRIPTIT/location.js
-// Paikkakuntavalikko (aakkosjärjestyksessä) + keskitetty modaali + integrointi hinnoitteluun + dynaaminen klikkausefekti + dynaaminen korostus
+// Paikkakunnan valinta + hintojen päivitys
 
-(function() {
-  const satakuntaCities = [
-    "Eura", "Eurajoki", "Harjavalta", "Huittinen", "Jämijärvi",
-    "Kankaanpää", "Karvia", "Kokemäki", "Merikarvia", "Nakkila",
-    "Pomarkku", "Pori", "Rauma", "Siikainen", "Säkylä", "Ulvila"
-  ].sort(); // Varmistetaan aakkosjärjestys (jo valmiiksi lähes)
+let currentCity = 'Harjavalta';
 
-  function createCityButtons(container) {
-    if (!container) return;
+// Kaupungit aakkosjärjestyksessä
+const cities = [
+    'Harjavalta', 'Kankaanpää', 'Pori', 'Rauma', 'Ulvila',
+    'Eura', 'Eurajoki', 'Honkajoki', 'Huittinen', 'Isojoki',
+    'Jämijärvi', 'Kauhajoki', 'Kaustinen', 'Kokemäki', 'Kristiinankaupunki',
+    'Kullaa', 'Lappi', 'Lavia', 'Länsi-Turunmaa', 'Merikarvia',
+    'Nakkila', 'Noormarkku', 'Pomarkku', 'Siikainen', 'Sastamala',
+    'Vammala', 'Vesilahti', 'Ylistaro'
+];
 
-    container.innerHTML = ''; // Tyhjennä vanhat
+function getCurrentCity() {
+    return currentCity;
+}
 
-    // Hae nykyinen valittu paikkakunta (ensisijaisesti pricing.js:stä, fallback DOM)
-    let currentSelected = "Harjavalta";
-    if (typeof window.getCurrentCity === 'function') {
-      currentSelected = window.getCurrentCity();
-    } else {
-      const locText = document.getElementById('bottom-location-text');
-      if (locText) {
-        const strong = locText.querySelector('strong');
-        if (strong) {
-          currentSelected = strong.textContent.trim();
-        } else {
-          const match = locText.textContent.match(/:\s*([A-Za-zäöåÄÖÅ]+)/);
-          if (match) currentSelected = match[1];
+function getDistanceFromHarjavalta(city) {
+    const distances = {
+        'Harjavalta': 0,
+        'Kankaanpää': 45,
+        'Pori': 35,
+        'Rauma': 55,
+        'Ulvila': 25,
+        'Eura': 30,
+        'Eurajoki': 40,
+        'Honkajoki': 60,
+        'Huittinen': 50,
+        'Isojoki': 75,
+        'Jämijärvi': 55,
+        'Kauhajoki': 80,
+        'Kaustinen': 95,
+        'Kokemäki': 20,
+        'Kristiinankaupunki': 85,
+        'Kullaa': 15,
+        'Lappi': 70,
+        'Lavia': 65,
+        'Länsi-Turunmaa': 110,
+        'Merikarvia': 50,
+        'Nakkila': 18,
+        'Noormarkku': 42,
+        'Pomarkku': 48,
+        'Siikainen': 58,
+        'Sastamala': 45,
+        'Vammala': 52,
+        'Vesilahti': 78,
+        'Ylistaro': 88
+    };
+    return distances[city] || 60;
+}
+
+function updatePricesForCity(city) {
+    currentCity = city;
+
+    const distance = getDistanceFromHarjavalta(city);
+    const travelCost = Math.round(distance * 0.65 * 2);
+
+    const priceElements = {
+        'price-h1': 800,
+        'price-h2': 1300,
+        'price-h3': 300,
+        'price-f1': 300,
+        'price-f2': 600
+    };
+
+    Object.keys(priceElements).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            const basePrice = priceElements[id];
+            const finalPrice = basePrice + travelCost;
+            el.textContent = finalPrice + ' €';
         }
-      }
+    });
+
+    const bottomLocationText = document.getElementById('bottom-location-text');
+    if (bottomLocationText) {
+        bottomLocationText.innerHTML = `Kuvauspaikka: <strong>${city}</strong>`;
     }
 
-    satakuntaCities.forEach(city => {
-      const btn = document.createElement('button');
-      btn.className = 'city-btn';
-      btn.textContent = city;
+    const selectBtn = document.getElementById('select-location-btn');
+    if (selectBtn) {
+        selectBtn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align: middle; margin-right: 0.4rem;">
+                <path d="M12 21.5C12 21.5 20 14 20 9C20 5.13401 16.866 2 13 2C9.13401 2 6 5.13401 6 9C6 14 12 21.5 12 21.5Z" fill="currentColor"/>
+                <circle cx="12" cy="9" r="3" fill="#ffffff"/>
+            </svg>
+            ${city}
+        `;
+    }
+}
 
-      // Korosta dynaamisesti nykyinen valittu paikkakunta (ei aina Harjavalta)
-      if (city === currentSelected) {
-        btn.style.border = '2px solid #d4af37';
-        btn.style.fontWeight = '600';
-      }
+function createCityButtons(container) {
+    container.innerHTML = '';
 
-      btn.onclick = () => {
-        // Dynaaminen klikkausefekti responsiivisuuden tunteen luomiseksi
-        btn.classList.add('clicked');
-        setTimeout(() => {
-          btn.classList.remove('clicked');
-          // Kutsutaan pricing.js:n funktiota (menu sulkeutuu automaattisesti)
-          if (typeof window.selectCityAndUpdatePrices === 'function') {
-            window.selectCityAndUpdatePrices(city);
-          } else {
-            // Fallback jos pricing ei latautunut
-            console.warn('selectCityAndUpdatePrices ei löytynyt');
-            document.getElementById('selected-city') && (document.getElementById('selected-city').textContent = city);
-          }
-        }, 180); // Lyhyt viive efektille ennen sulkemista
-      };
+    cities.forEach(city => {
+        const btn = document.createElement('button');
+        btn.className = 'city-btn';
+        btn.textContent = city;
 
-      container.appendChild(btn);
+        if (city === currentCity) {
+            btn.classList.add('clicked');
+            btn.style.border = '2px solid #d4af37';
+            btn.style.background = '#fff8e1';
+        }
+
+        btn.addEventListener('click', () => {
+            container.querySelectorAll('.city-btn').forEach(b => {
+                b.classList.remove('clicked');
+                b.style.border = '';
+                b.style.background = '';
+            });
+
+            btn.classList.add('clicked');
+            btn.style.border = '2px solid #d4af37';
+            btn.style.background = '#fff8e1';
+
+            setTimeout(() => {
+                updatePricesForCity(city);
+                closeModal();
+            }, 180);
+        });
+
+        container.appendChild(btn);
     });
-  }
+}
 
-  // Näytä modaali
-  window.showLocationModal = function() {
+window.showLocationModal = function() {
     const modal = document.getElementById('location-modal');
     if (!modal) return;
 
-    const listContainer = modal.querySelector('#city-list-container') || modal.querySelector('.modal-content');
-    
-    // Jos ei ole valmista list containeria, luodaan dynaamisesti
     let cityList = document.getElementById('city-list-container');
     if (!cityList) {
-      cityList = document.createElement('div');
-      cityList.id = 'city-list-container';
-      cityList.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin: 1.2rem 0;';
-      
-      // Lisätään listaan modalin sisältöön (ennen sulje-nappia)
-      const closeBtn = modal.querySelector('button[onclick*="closeModal"]');
-      if (closeBtn && closeBtn.parentNode) {
-        closeBtn.parentNode.insertBefore(cityList, closeBtn);
-      } else {
-        modal.querySelector('.modal-content').appendChild(cityList);
-      }
+        cityList = document.createElement('div');
+        cityList.id = 'city-list-container';
+        cityList.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 0.55rem; margin-bottom: 1.4rem;';
+
+        const closeBtn = modal.querySelector('button[onclick*="closeModal"]');
+        if (closeBtn && closeBtn.parentNode) {
+            closeBtn.parentNode.insertBefore(cityList, closeBtn);
+        } else {
+            modal.querySelector('.modal-content').appendChild(cityList);
+        }
     }
 
     createCityButtons(cityList);
 
-    // Automaattinen scrollaus Paketit ja hinta -osioon, jotta asiakas näkee hinnanmuutoksen
-    const packagesSection = document.getElementById('paketit');
-    if (packagesSection) {
-      // Pieni viive jotta modaali ehtii avautua ensin
-      setTimeout(() => {
-        packagesSection.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      }, 250);
-    }
-
+    // Ei enää automaattista skrollausta hinnastoon
     modal.style.display = 'flex';
-  };
+};
 
-  // Sulje modaali
-  window.closeModal = function() {
+window.closeModal = function() {
     const modal = document.getElementById('location-modal');
     if (modal) modal.style.display = 'none';
-  };
-
-  // Escape-näppäin sulkee modaal in
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-      const modal = document.getElementById('location-modal');
-      if (modal && modal.style.display === 'flex') {
-        modal.style.display = 'none';
-      }
-    }
-  });
-
-  // Alustetaan (valinnainen: jos halutaan default valinta)
-  // document.addEventListener('DOMContentLoaded', () => { ... });
-})();
+};
