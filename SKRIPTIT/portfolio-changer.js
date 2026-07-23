@@ -67,6 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus21.webp", alt: "Combat 21" }
             ]
         },
+             {
+            title: "Hää & Juhlakuvaus",
+            media: [
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus101.webp", alt: "Combat 13" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus111.webp", alt: "Combat 3" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus113.webp", alt: "Combat 14" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus118.webp", alt: "Combat 1" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus123.webp", alt: "Combat 5" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus127.webp", alt: "Combat 21" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus128.webp", alt: "Combat 13" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus129.webp", alt: "Combat 3" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus119.webp", alt: "Combat 14" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus125.webp", alt: "Combat 1" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus97.webp", alt: "Combat 5" },
+                { src: "MEDIA/VALOKUVAUSARKISTO/Valokuvaus126.webp", alt: "Combat 5" }
+            ]
+        },
         {
             title: "Laura Voutilainen - Kerran Keväällä",
             media: [
