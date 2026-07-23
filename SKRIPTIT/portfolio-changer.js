@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // =====================================================
     const dokumentaarinenImages = [
         "MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp",
-        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus2.webp",
-        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus6.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus3.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus4.webp",
         "MEDIA/VALOKUVAUSARKISTO/Valokuvaus13.webp",
-        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus16.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus10.webp",
         "MEDIA/VALOKUVAUSARKISTO/Valokuvaus18.webp",
-        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus23.webp",
-        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus27.webp"
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus22.webp",
+        "MEDIA/VALOKUVAUSARKISTO/Valokuvaus23.webp"
     ];
 
     const docImage = document.getElementById('dokumentaarinen-image');
