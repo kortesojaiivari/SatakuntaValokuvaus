@@ -12,6 +12,7 @@
 
   // Alarivi (row-3)
   const bottomRow = [100,101,120,123,113,118,103,111,121,127,128,125,83,81,82,86,89,94,114,105,107,106,91,90,93,118,116,117,119,112,110];
+  
 
   const basePath = "MEDIA/VALOKUVAUSARKISTO/Valokuvaus";
 
