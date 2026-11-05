@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satakunta Valokuvaus – Kuvakaruselli</title>
+    <meta name="description" content="Dokumentaarinen hääkuvaus, hautajais- ja muistotilaisuuskuvaus sekä valmistujaisjuhlat Satakunnassa. Valokuvaaja Iivari Kortesoja, Kankaanpää. Hinnat alkaen 300 €.">
+    <link rel="canonical" href="https://satakuntavalokuvaus.com/">
+    <meta name="robots" content="noindex,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fi_FI">
+    <meta property="og:site_name" content="Satakunta Valokuvaus">
+    <meta property="og:title" content="Satakunta Valokuvaus – Kuvakaruselli">
+    <meta property="og:description" content="Dokumentaarinen hääkuvaus, hautajais- ja muistotilaisuuskuvaus sekä valmistujaisjuhlat Satakunnassa. Valokuvaaja Iivari Kortesoja, Kankaanpää. Hinnat alkaen 300 €.">
+    <meta property="og:url" content="https://satakuntavalokuvaus.com/">
+    <meta property="og:image" content="https://satakuntavalokuvaus.com/MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Satakunta Valokuvaus – Kuvakaruselli">
+    <meta name="twitter:description" content="Dokumentaarinen hääkuvaus, hautajais- ja muistotilaisuuskuvaus sekä valmistujaisjuhlat Satakunnassa. Valokuvaaja Iivari Kortesoja, Kankaanpää. Hinnat alkaen 300 €.">
+    <meta name="twitter:image" content="https://satakuntavalokuvaus.com/MEDIA/VALOKUVAUSARKISTO/Valokuvaus1.webp">
+    <meta name="theme-color" content="#ffffff">
     
     <!-- GOOGLE ANALYTICS 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTMFLZTH9R"></script>
@@ -385,6 +400,9 @@
             text-align: center;
             padding: 4.8rem 2rem;
         }
+        /* Lisätilaa alas, jotta kiinteä alaheader ei peitä tekstejä */
+        footer#yhteystiedot { padding-bottom: 11rem !important; }
+        @media (max-width:768px){ footer#yhteystiedot { padding-bottom: 13rem !important; } }
         
         .location-modal {
             display: none;
@@ -537,7 +555,7 @@
 </head>
 <body>
     <!-- NAV (yksinkertaistettu - ilman darkmodea) -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Päävalikko">
         <div class="nav-content">
             <a href="#" class="logo">Satakunta Valokuvaus</a>
             

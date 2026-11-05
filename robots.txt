@@ -1,0 +1,122 @@
+# robots.txt – https://satakuntavalokuvaus.com
+User-agent: *
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Applebot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Grok
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: xAI-Bot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: CCBot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /Kuvakaruselli.html
+Disallow: /SatakuntaValokuvaus/
+Disallow: /SATAKUNTA-BACKUP/
+
+Sitemap: https://satakuntavalokuvaus.com/sitemap.xml
