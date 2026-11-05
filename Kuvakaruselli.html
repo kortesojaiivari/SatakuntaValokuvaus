@@ -557,11 +557,11 @@
             <h1>Valokuvista ihminen muistetaan</h1>
             
             <div class="service-offerings">
-                <button class="service-pill" onclick="selectService('Hääkuvaus')">Hääkuvaus</button>
-                <button class="service-pill" onclick="selectService('Hautajaiset')">Hautajaiset</button>
-                <button class="service-pill" onclick="selectService('Valmistujaisjuhlat')">Valmistujaisjuhlat</button>
-                <button class="service-pill" onclick="selectService('Tapahtuma')">Tapahtuma & taltiointi</button>
-                <button class="service-pill" onclick="selectService('Ilmakuvaus')">Ilmakuvaus</button>
+                <button type="button" class="service-pill" style="cursor:default;">Hääkuvaus</button>
+                <button type="button" class="service-pill" style="cursor:default;">Hautajaiset</button>
+                <button type="button" class="service-pill" style="cursor:default;">Valmistujaisjuhlat</button>
+                <button class="service-pill" type="button" onclick="window.location.href='https://iivarikortesoja.media/'">Tapahtuma & taltiointi</button>
+                <button class="service-pill" type="button" onclick="window.location.href='https://iivarikortesoja.media/'">Ilmakuvaus</button>
             </div>
         </div>
     </header>
@@ -679,6 +679,41 @@
                 <div class="price">116 €</div>
                 <p>Lisäaika kuvaukseen (hinta per tunti)</p>
             </div>
+            <div class="package-card">
+                <h3>Toinen kuvaaja</h3>
+                <p>Toinen kuvaaja mahdollistaa kuvien ottamisen varmasti joka tilanteesta. Jos haluat toisen kuvaajan, ilmoita siitä yhteydenotossa erikseen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- YHTEYDENOTTO: sähköposti + WhatsApp (mallina iivarikortesoja.media/Valokuvaus.html) -->
+    <style>
+        #wa-contact{max-width:1000px;margin:0 auto;padding:3.5rem 1.2rem 1rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:stretch}
+        #wa-contact .wa-card{background:#fff;border:1px solid #eee;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,.08);padding:2.2rem 1.6rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:1.1rem;transition:transform .35s ease, box-shadow .35s ease}
+        #wa-contact .wa-card:hover{transform:translateY(-6px);box-shadow:0 20px 55px rgba(0,0,0,.14)}
+        #wa-contact h3{font-family:'Playfair Display',serif;font-size:1.7rem;margin:0;color:var(--primary)}
+        #wa-contact p{margin:0;color:#666;line-height:1.45}
+        #wa-contact .wa-btn{display:inline-block;background:#d4af37;color:#fff;font-weight:700;text-decoration:none;padding:.85rem 2.2rem;border-radius:30px;font-size:1.05rem;transition:all .3s ease}
+        #wa-contact .wa-btn:hover{background:#c5a030;transform:translateY(-1px)}
+        #wa-contact .wa-qr{display:block;width:100%;max-width:260px}
+        #wa-contact .wa-qr img{width:100%;height:auto;border-radius:12px;display:block}
+        .dark-mode #wa-contact .wa-card{background:#222;border-color:#333}
+        .dark-mode #wa-contact p{color:#bbb}
+        @media (max-width:768px){#wa-contact{grid-template-columns:1fr;padding-top:2.5rem}}
+    </style>
+    <section id="wa-contact">
+        <div class="wa-card">
+            <h3>Ota yhteyttä</h3>
+            <p>kortesoja.iivari@gmail.com</p>
+            <a href="mailto:kortesoja.iivari@gmail.com" class="wa-btn">Minun sähköposti</a>
+        </div>
+        <div class="wa-card">
+            <h3>WhatsApp</h3>
+            <a href="https://wa.me/message/2JQ4G2D3EXLID1" target="_blank" rel="noopener" class="wa-qr">
+                <img src="MEDIA/Ikonit/whatsapp-qr.webp" alt="WhatsApp QR-koodi">
+            </a>
+            <p>Klikkaa elementtiä tai lue QR-koodi päästäksesi keskustelemaan</p>
+            <a href="https://wa.me/message/2JQ4G2D3EXLID1" target="_blank" rel="noopener" class="wa-btn">Avaa WhatsApp</a>
         </div>
     </section>
 
@@ -689,11 +724,15 @@
         <div style="max-width:720px; margin:0 auto;">
             <div class="faq-item">
                 <h4>Kuvien toimitus?</h4>
-                <p>Toimitan kuvat digitaalisesti pilvipalvelun kautta, josta voit ladata ne laitteellesi.</p>
+                <p>Toimitan kuvat digitaalisesti pilvipalvelun kautta, josta voit ladata ne laitteellesi. Erillisenä lisäpalveluna voi ostaa toimitetun muistikortin, jossa kuvat ovat tallessa.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Hyvä tietää</h4>
+                <p>Otamme usein myös ryhmäkuvia: koko kuvan, jossa ovat kaikki vieraat, sekä erillisiä muutaman hengen ryhmäkuvia.</p>
             </div>
             <div class="faq-item">
                 <h4>Varausmaksu?</h4>
-                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopfinalisesta laskusta.</p>
+                <p>Sovittuamme ajankohdan perin varausmaksun, joka vähennetään lopullisesta laskusta.</p>
             </div>
             <div class="faq-item">
                 <h4>Kilometrikorvaukset?</h4>
@@ -711,8 +750,7 @@
         <p style="font-size:2.15rem; color:white; margin-bottom:1.1rem;">Satakunta Valokuvaus</p>
         <p>Y-Tunnus 3591660-9</p>
         <p>Iivari Kortesoja • Kankaanpää / Satakunta</p>
-        <p style="margin-top:2.3rem;">📧 <a href="mailto:info@satakuntavalokuvaus.fi" style="color:#d4af37; text-decoration:none;">info@satakuntavalokuvaus.fi</a></p>
-        <p style="margin-top:3.8rem; opacity:0.55; font-size:0.92rem;">© 2026 Satakunta Valokuvaus. Kaikki oikeudet pidätetään.</p>
+        <p style="margin-top:2.3rem;">📧 <a href="mailto:kortesoja.iivari@gmail.com" style="color:#d4af37; text-decoration:none;">kortesoja.iivari@gmail.com</a></p>
     </footer>
 
     <!-- LOCATION MODAL -->

@@ -8,6 +8,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const servicePills = document.querySelectorAll('.service-pill');
     const locationModal = document.getElementById('location-modal');
 
+    // === HEADERIN NAPPULAT: pysyvät aina ruudulla (skaalaus + kaksi riviä kapeissa ikkunoissa) ===
+    if (!document.getElementById('nav-fit-style')) {
+        const navFit = document.createElement('style');
+        navFit.id = 'nav-fit-style';
+        navFit.textContent = `
+            .nav-links { min-width: 0; }
+            .nav-pill { white-space: nowrap; }
+            @media (min-width: 901px) and (max-width: 1100px) {
+                .nav-links { gap: clamp(0.6rem, 1.6vw, 1.6rem) !important; }
+                .nav-pill {
+                    padding: 0.4rem clamp(0.6rem, 1.1vw, 0.9rem) !important;
+                    font-size: clamp(0.82rem, 1.05vw, 0.95rem) !important;
+                }
+            }
+            @media (min-width: 601px) and (max-width: 900px) {
+                .nav-content {
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.35rem;
+                }
+                .logo { width: auto !important; text-align: center; }
+                .nav-links {
+                    width: auto !important;
+                    justify-content: center !important;
+                    flex-wrap: wrap;
+                    gap: 0.6rem !important;
+                }
+                .nav-pill { flex: 0 0 auto !important; }
+            }
+        `;
+        document.head.appendChild(navFit);
+    }
+
     function applyResponsiveAdjustments() {
         const width = window.innerWidth;
 
@@ -97,7 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (carouselBg) carouselBg.style.opacity = '0.52';
             } else if (width < 900) {
                 hero.style.minHeight = '420px';
-                hero.style.paddingTop = '4.8rem';
+                // Header on kaksirivinen 601–900 px: varmista ettei otsikko jää sen alle
+                hero.style.paddingTop = Math.max(77, navbar.offsetHeight + 30) + 'px';
             } else {
                 hero.style.minHeight = '480px';
                 hero.style.paddingTop = '1.8rem';
