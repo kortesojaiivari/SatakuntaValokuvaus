@@ -11,8 +11,8 @@
                 
                 <!-- Ala rivi mobiilissa: Nappulat -->
                 <div class="nav-links">
-                    <a href="#yhteystiedot" class="nav-pill">Yhteystiedot</a>
-                    <a href="#videokuvaus" class="nav-pill">Videokuvaus</a>
+                    <a href="#wa-contact" class="nav-pill">Yhteystiedot</a>
+                    <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill">Videokuvaus</a>
                     <a href="https://iivarikortesoja.media" target="_blank" rel="noopener" class="nav-pill" style="background:#c5a030; color:white; font-weight:700;">Yrityksille</a>
                 </div>
             </div>
